@@ -6,6 +6,8 @@
 </head>
 <body>
 <h3>Grocery List</h3>
+<nav th:replace="fragments :: navigation"></nav>
+<p th:unless="${items} and ${items.size()}">No grocery items!</p>
 <ol>
     <th:block th:each="item : ${items}">
         <li th:text="${item}"></li>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Grocery Item</title>
+</head>
+<body>
+<h2>Add Grocery Item</h2>
+<nav th:replace="fragments :: navigation"></nav>
+<form method="post" action="/grocerylist/add">
+    <input type="text" name="groceryName">
+    <input type="submit" value="Add Item">
+</form>
+</body>
+</html>

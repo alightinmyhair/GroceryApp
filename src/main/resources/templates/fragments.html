@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Grocery App</title>
+
+    <script th:src="@{script.js}"></script>
+    <link th:href="@{styles.css}">
+
+</head>
+<body>
+<nav th:fragment="navigation">
+    <ul>
+        <li><a href = "/index">Grocery List</a></li>
+        <li><a href = "/groceryList/add">Add Grocery Item</a></li>
+    </ul>
+</nav>
+</body>
+</html>

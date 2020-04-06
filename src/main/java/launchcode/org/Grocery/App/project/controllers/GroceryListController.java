@@ -3,7 +3,9 @@ package launchcode.org.Grocery.App.project.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +15,22 @@ import java.util.List;
 @RequestMapping("grocerylist")
 public class GroceryListController {
 
-//    @GetMapping("grocerylist")
+    private static List <String> items= new ArrayList<>();
+
     @GetMapping
     public String displayGroceryList(Model model){
-        List<String> items = new ArrayList<>();
-        items.add("Brown Eggs");
-        items.add("Oberweis Milk");
-        items.add("Lemons");
-        items.add("Orange Juice");
         model.addAttribute("items", items);
         return "groceryList/index";
+
+    }
+    @GetMapping("add")
+    public String renderCreateGroceryListForm(){
+        return "groceryList/add";
+    }
+
+    @PostMapping("add")
+    public String addGroceryItem(@RequestParam String groceryName){
+        items.add(groceryName);
+        return "redirect:";
     }
 }
