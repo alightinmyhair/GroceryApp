@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
+<head th:replace="fragments :: head">
     <meta charset="UTF-8">
     <title>Grocery App</title>
 </head>
-<body>
-<h2>Grocery App</h2>
-<nav th:replace="fragments :: navigation"></nav>
+<body class="container">
+<h2>Welcome to the Grocery App!</h2>
+<header th:replace="fragments :: header"></header>
 </body>
 </html>

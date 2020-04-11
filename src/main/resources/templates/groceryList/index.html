@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
+<head th:replace="fragments :: head">
     <meta charset="UTF-8">
     <title>Grocery App</title>
 </head>
-<body>
-<h3>Grocery List</h3>
-<nav th:replace="fragments :: navigation"></nav>
+<body class="container">
+
+<h2>Grocery List</h2>
+<header th:replace="fragments :: header"></header>
+
 <p th:unless="${items} and ${items.size()}">No grocery items!</p>
-<ol>
-    <th:block th:each="item : ${items}">
-        <li th:text="${item}"></li>
-    </th:block>
-</ol>
+<table class="table table-hover table-striped">
+    <thead>
+    <tr>
+        <th>Item Name</th>
+    </tr>
+    </thead>
+    <tr  th:each="item : ${items}">
+        <td th:text="${item}"></td>
+    </tr>
+</table>
 </body>
 </html>
