@@ -8,7 +8,6 @@
 
 <h1>Main Grocery List</h1>
 <header th:replace="fragments :: header"></header>
-<h1>TEST</h1>
 
 <h5>Add Grocery Item</h5>
 <form method="post" action="/grocerylist">
@@ -38,6 +37,7 @@
 <table class="table table-hover table-striped">
     <thead>
     <tr>
+        <th>ID</th>
         <th>Select</th>
         <th>Item Name</th>
         <th>Item Category</th>
@@ -46,6 +46,7 @@
     <tbody>
     <th:block>
         <tr  th:each="item : ${items}">
+            <td th:text="${item.id}"></td>
             <td><input type="checkbox"></td>
             <td th:text="${item.name}"></td>
             <td th:text="${item.category}"></td>
