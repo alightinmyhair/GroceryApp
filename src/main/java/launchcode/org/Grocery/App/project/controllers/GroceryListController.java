@@ -1,5 +1,6 @@
 package launchcode.org.Grocery.App.project.controllers;
 
+import launchcode.org.Grocery.App.project.data.GroceryItemData;
 import launchcode.org.Grocery.App.project.models.GroceryItem;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,19 +17,17 @@ import java.util.List;
 @RequestMapping("grocerylist")
 public class GroceryListController {
 
-    private static List <GroceryItem> items = new ArrayList<>();
-
     @GetMapping
     public String displayGroceryList(Model model){
-        model.addAttribute("items", items);
+        model.addAttribute("items", GroceryItemData.getAll());
         return "groceryList/index";
 
     }
 
     @PostMapping
     public String addGroceryItem(Model model, @RequestParam String groceryItemName, @RequestParam String groceryCategory){
-        items.add(new GroceryItem(groceryItemName, groceryCategory));
-        model.addAttribute("items",items);
+        GroceryItemData.add(new GroceryItem(groceryItemName, groceryCategory));
+        model.addAttribute("items",GroceryItemData.getAll());
         return "groceryList/index";
     }
 }
