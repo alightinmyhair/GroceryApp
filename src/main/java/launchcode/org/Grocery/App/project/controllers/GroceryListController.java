@@ -27,6 +27,13 @@ public class GroceryListController {
         model.addAttribute("items",GroceryItemData.getAll());
         return "groceryList/index";
     }
+
+//    @PostMapping
+//    public String editGroceryItem(Model model, @ModelAttribute GroceryItem updateGroceryItem){
+//        GroceryItemData.
+//
+//    }
+
     @PostMapping("grocerylist")
     public String removeGroceryItem(Model model, @RequestParam(required = false) int[] itemIds, String edit, String delete){
         if (edit.equals("Edit Category")){

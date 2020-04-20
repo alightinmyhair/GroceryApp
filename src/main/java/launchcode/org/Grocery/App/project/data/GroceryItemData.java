@@ -21,9 +21,15 @@ public class GroceryItemData {
     public static void add(GroceryItem groceryItem){
         items.put(groceryItem.getId(), groceryItem);
     }
+
+//    public static void edit(int id){
+//        items.replace(id, items.getValue() );
+//    }
+
     //delete item
     public static void remove(int id){
         items.remove(id);
 //        items.remove(items.get(id));
+
     }
 }

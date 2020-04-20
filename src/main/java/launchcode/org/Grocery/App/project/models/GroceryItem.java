@@ -1,5 +1,7 @@
 package launchcode.org.Grocery.App.project.models;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class GroceryItem {
@@ -7,7 +9,11 @@ public class GroceryItem {
     private int id;
     private static int nextId=1;
 
+    @NotBlank
+    @Size(min=3, max =50, message="Item name must be between 3-50 characters.")
     private String name;
+
+    @Size(max=100, message="Category too long!")
     private String category;
 
     public GroceryItem(String name, String category) {
