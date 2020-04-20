@@ -4,10 +4,7 @@ import launchcode.org.Grocery.App.project.data.GroceryItemData;
 import launchcode.org.Grocery.App.project.models.GroceryItem;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,14 +22,14 @@ public class GroceryListController {
     }
     // TODO: KEJ - change url? ("addGrocery")
     @PostMapping
-    public String addGroceryItem(Model model, @RequestParam String groceryItemName, @RequestParam String groceryCategory){
-        GroceryItemData.add(new GroceryItem(groceryItemName, groceryCategory));
+    public String addGroceryItem(Model model, @ModelAttribute GroceryItem newGroceryItem){
+        GroceryItemData.add(newGroceryItem);
         model.addAttribute("items",GroceryItemData.getAll());
         return "groceryList/index";
     }
     @PostMapping("grocerylist")
     public String removeGroceryItem(Model model, @RequestParam(required = false) int[] itemIds, String edit, String delete){
-        if (edit == "Edit Category"){
+        if (edit.equals("Edit Category")){
             System.out.println("edit button clicked");
         }
         if(itemIds != null){
