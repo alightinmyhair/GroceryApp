@@ -24,5 +24,6 @@ public class GroceryItemData {
     //delete item
     public static void remove(int id){
         items.remove(id);
+//        items.remove(items.get(id));
     }
 }
