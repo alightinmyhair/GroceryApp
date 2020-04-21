@@ -4,8 +4,10 @@ import launchcode.org.Grocery.App.project.data.GroceryItemData;
 import launchcode.org.Grocery.App.project.models.GroceryItem;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,12 @@ public class GroceryListController {
     }
     // TODO: KEJ - change url? ("addGrocery")
     @PostMapping
-    public String addGroceryItem(Model model, @ModelAttribute GroceryItem newGroceryItem){
+    public String addGroceryItem(Model model, @ModelAttribute @Valid GroceryItem newGroceryItem, Errors errors){
+        if (errors.hasErrors()){
+            model.addAttribute("items", GroceryItemData.getAll());
+            model.addAttribute("errorMsg", "Bad Data!");
+            return "groceryList/index";
+        }
         GroceryItemData.add(newGroceryItem);
         model.addAttribute("items",GroceryItemData.getAll());
         return "groceryList/index";

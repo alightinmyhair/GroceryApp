@@ -13,12 +13,12 @@ public class GroceryItem {
     @Size(min=3, max =50, message="Item name must be between 3-50 characters.")
     private String name;
 
-    @Size(max=100, message="Category too long!")
-    private String category;
+    @Size(max=100, message="Description too long!")
+    private String description;
 
-    public GroceryItem(String name, String category) {
+    public GroceryItem(String name, String description) {
         this.name = name;
-        this.category = category;
+        this.description = description;
         this.id = nextId;
         nextId++;
     }
@@ -31,12 +31,12 @@ public class GroceryItem {
         this.name = name;
     }
 
-    public String getCategory() {
-        return category;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setDescription(String Description) {
+        this.description = description;
     }
 
     public int getId() {

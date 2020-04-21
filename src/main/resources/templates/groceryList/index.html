@@ -9,20 +9,22 @@
 <h1>Main Grocery List</h1>
 <header th:replace="fragments :: header"></header>
 
+<p th:text="${errorMsg}" style="color:red;"></p>
+
 <form method="post">
     <div class="row">
         <div class="col-sm-8">
             <label>Item Name
                 <input type="text" name="name" class="form-control">
             </label>
-            <label>Category
-                <input type="text" name="category" class="form-control">
+            <label>Description
+                <input type="text" name="description" class="form-control">
             </label>
             <input type="submit" value="Add Item" class="btn  btn-success btn-md">
         </div>
         <div class="form-group">
             <div class="col-sm-4">
-                <input type="submit" form="groceryListForm" name="edit" value="Edit Category" class="btn btn-warning btn-sm">
+                <input type="submit" form="groceryListForm" name="edit" value="Edit Item" class="btn btn-warning btn-sm">
                 <input type="submit" form="groceryListForm" name="delete" value="Delete Item" class="btn btn-danger btn-sm">
             </div>
         </div>
@@ -38,7 +40,7 @@
     <tr>
         <th>Select</th>
         <th>Item Name</th>
-        <th>Item Category</th>
+        <th>Item Description</th>
     </tr>
     </thead>
     <tbody>
@@ -46,7 +48,7 @@
         <tr  th:each="item : ${items}">
             <td><input type="checkbox" name="itemIds" th:value="${item.id}"></td>
             <td th:text="${item.name}"></td>
-            <td th:text="${item.category}"></td>
+            <td th:text="${item.description}"></td>
         </tr>
     </th:block>
     <tr th:unless="${items} and ${items.size()}">
