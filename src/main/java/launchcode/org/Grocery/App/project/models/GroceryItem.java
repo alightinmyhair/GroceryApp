@@ -9,17 +9,22 @@ public class GroceryItem {
     private int id;
     private static int nextId=1;
 
-    @NotBlank
+    @NotBlank(message="Item name must not be blank.")
     @Size(min=3, max =50, message="Item name must be between 3-50 characters.")
     private String name;
 
-    @Size(max=100, message="Description too long!")
+    @Size(max=50, message="Description too long!")
     private String description;
 
     public GroceryItem(String name, String description) {
         this.name = name;
         this.description = description;
         this.id = nextId;
+        nextId++;
+    }
+
+    public GroceryItem(){
+        this.id=nextId;
         nextId++;
     }
 
@@ -35,7 +40,7 @@ public class GroceryItem {
         return description;
     }
 
-    public void setDescription(String Description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

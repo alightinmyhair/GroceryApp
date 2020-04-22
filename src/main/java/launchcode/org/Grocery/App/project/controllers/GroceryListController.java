@@ -19,6 +19,7 @@ public class GroceryListController {
     @GetMapping
     public String displayGroceryList(Model model){
         model.addAttribute("items", GroceryItemData.getAll());
+        model.addAttribute(new GroceryItem());
         return "groceryList/index";
 
     }
@@ -27,7 +28,6 @@ public class GroceryListController {
     public String addGroceryItem(Model model, @ModelAttribute @Valid GroceryItem newGroceryItem, Errors errors){
         if (errors.hasErrors()){
             model.addAttribute("items", GroceryItemData.getAll());
-            model.addAttribute("errorMsg", "Bad Data!");
             return "groceryList/index";
         }
         GroceryItemData.add(newGroceryItem);
