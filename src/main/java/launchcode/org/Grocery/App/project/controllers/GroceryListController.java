@@ -40,12 +40,15 @@ public class GroceryListController {
 //        GroceryItemData.
 //
 //    }
-
+    //Ryan suggests that it is my mapping
+    //Post = update, need to differentiate b/w a post...I can't post empty info
+//    @RequestMapping(method=DELETE)
     @PostMapping("grocerylist")
-    public String removeGroceryItem(Model model, @RequestParam(required = false) int[] itemIds, String edit, String delete){
-        if (edit.equals("Edit Category")){
-            System.out.println("edit button clicked");
-        }
+    public String removeGroceryItem(Model model, @RequestParam(required = false) int[] itemIds, String edit, String remove){
+//        if (edit.equals("Edit Category")){
+//            System.out.println("edit button clicked");
+//        }
+
         if(itemIds != null){
             for (int id : itemIds){
                 System.out.println(GroceryItemData.getById(id));
