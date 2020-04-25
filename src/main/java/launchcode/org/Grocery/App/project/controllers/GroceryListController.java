@@ -23,7 +23,7 @@ public class GroceryListController {
         return "groceryList/index";
 
     }
-    // TODO: KEJ - change url? ("addGrocery")
+    // TODO: - change url? ("addGrocery")
     @PostMapping
     public String addGroceryItem(Model model, @ModelAttribute @Valid GroceryItem newGroceryItem, Errors errors){
         if (errors.hasErrors()){
@@ -44,18 +44,39 @@ public class GroceryListController {
     //Post = update, need to differentiate b/w a post...I can't post empty info
 //    @RequestMapping(method=DELETE)
     @PostMapping("grocerylist")
-    public String removeGroceryItem(Model model, @RequestParam(required = false) int[] itemIds, String edit, String remove){
-//        if (edit.equals("Edit Category")){
+    public String removeGroceryItem(Model model, @RequestParam int[] itemIds, String edit, String delete){
+        // TODO: KEJ - create new class to handle itemIds and edit/delete buttons?
+        if (edit != null){
+            System.out.println("edit button clicked");
+
+        }
+//        if (edit.equals("Edit Item")){
 //            System.out.println("edit button clicked");
+//            delete = "";
+//
 //        }
 
-        if(itemIds != null){
-            for (int id : itemIds){
-                System.out.println(GroceryItemData.getById(id));
-                GroceryItemData.remove(id);
-            }
+        if (delete != null){
+            System.out.println("delete clicked!");
         }
+//        if (delete.equals("Delete Item")){
+//            System.out.println("delete button clicked");
+//            edit = "";
+//        }
+
+//        if (delete.equals("Delete Item")){
+//            System.out.println("delete button clicked!!! :D");
+//        }
+
+//        if(itemIds != null){
+//            for (int id : itemIds){
+//                System.out.println(GroceryItemData.getById(id));
+//                GroceryItemData.remove(id);
+//            }
+//        }
         model.addAttribute("items",GroceryItemData.getAll());
+        // TODO: KEJ - new GroceryItem added in 'groceryList/index', what was causing error?
+        model.addAttribute(new GroceryItem());
         return "groceryList/index";
     }
 }

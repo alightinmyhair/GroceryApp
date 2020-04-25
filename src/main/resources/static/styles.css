@@ -1,11 +1,25 @@
+*{
+line-height:50px;
+}
+
 .greeting{
 font-family: 'Pacifico', cursive;
+color: #020116;
+margin: 20px;
+
 }
 
 .container{
 font-family: 'Josefin Sans', sans-serif;
 font-size: 20px;
 }
+
+#comingsoon{
+color:orange;
+font-size:30px;
+text-decoration: underline;
+}
+
 .error{
     color: red;
 }
