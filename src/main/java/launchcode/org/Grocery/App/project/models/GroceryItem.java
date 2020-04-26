@@ -16,17 +16,20 @@ public class GroceryItem {
     @Size(max=50, message="Description too long!")
     private String description;
 
-    public GroceryItem(String name, String description) {
+    private GroceryCategory category;
+
+    public GroceryItem(String name, String description, GroceryCategory category) {
+        this();
         this.name = name;
         this.description = description;
-        this.id = nextId;
-        nextId++;
+        this.category = category;
     }
 
     public GroceryItem(){
         this.id=nextId;
         nextId++;
     }
+
 
     public String getName() {
         return name;
@@ -46,6 +49,14 @@ public class GroceryItem {
 
     public int getId() {
         return id;
+    }
+
+    public GroceryCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(GroceryCategory category) {
+        this.category = category;
     }
 
     @Override

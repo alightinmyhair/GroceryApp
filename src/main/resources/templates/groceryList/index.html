@@ -21,6 +21,16 @@
             </label>
             <p class="error" th:errors="${groceryItem.description}"></p>
             <div class="form-group">
+                <label>Grocery Category
+                    <select th:field="${groceryItem.category}" class="form-control">
+                        <option th:each="category : ${categories}"
+                                th:value="${category}"
+                                th:text="${category.displayName}"
+                        ></option>
+                    </select>
+                </label>
+            </div>
+            <div class="form-group">
                 <input form="addGroceryForm" type="submit" value="Add Item" class="btn  btn-success btn-md">
             </div>
         </div>
@@ -42,6 +52,7 @@
         <th>Select</th>
         <th>Item Name</th>
         <th>Item Description</th>
+        <th>Grocery Category</th>
     </tr>
     </thead>
     <tbody>
@@ -50,10 +61,12 @@
             <td><input type="checkbox" name="itemIds" th:value="${item.id}"></td>
             <td th:text="${item.name}"></td>
             <td th:text="${item.description}"></td>
+            <td th:text="${item.category.displayName}"></td>
         </tr>
     </th:block>
     <tr th:unless="${items} and ${items.size()}">
         <td>No grocery items!</td>
+        <td></td>
         <td></td>
         <td></td>
     </tr>
