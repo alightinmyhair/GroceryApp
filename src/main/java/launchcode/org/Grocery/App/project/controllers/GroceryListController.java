@@ -40,15 +40,13 @@ public class GroceryListController {
 
     @PostMapping("grocerylist")
     public String removeGroceryItem(Model model, @RequestParam int[] itemIds, String edit, String delete){
-        // TODO: KEJ - create new class to handle itemIds and edit/delete buttons?
+        // TODO: RK - create new class to handle itemIds and edit/delete buttons?
         if (edit != null){
             System.out.println("edit button clicked");
-
         }
 //        if (edit.equals("Edit Item")){
 //            System.out.println("edit button clicked");
 //            delete = "";
-//
 //        }
 
         if (delete != null){
