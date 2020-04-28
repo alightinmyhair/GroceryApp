@@ -43,6 +43,8 @@ public class GroceryListController {
         // TODO: RK - create new class to handle itemIds and edit/delete buttons?
         if (edit != null){
             System.out.println("edit button clicked");
+            GroceryItem groceryItem = GroceryItemData.getById(itemIds[0]);
+            System.out.println(groceryItem);
         }
 //        if (edit.equals("Edit Item")){
 //            System.out.println("edit button clicked");

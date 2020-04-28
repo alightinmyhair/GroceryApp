@@ -1,5 +1,6 @@
 package launchcode.org.Grocery.App.project.data;
 
+import launchcode.org.Grocery.App.project.models.GroceryCategory;
 import launchcode.org.Grocery.App.project.models.GroceryItem;
 
 import java.util.Collection;
@@ -9,6 +10,7 @@ import java.util.Map;
 public class GroceryItemData {
     //need a place to put our Grocery Items - this will be our main property
     private static final Map<Integer, GroceryItem> items = new HashMap<>();
+
     //need to get all items
     public static Collection<GroceryItem> getAll(){
         return items.values();
@@ -17,14 +19,18 @@ public class GroceryItemData {
     public static GroceryItem getById(int id){
         return items.get(id);
     }
+
     //add an item
     public static void add(GroceryItem groceryItem){
         items.put(groceryItem.getId(), groceryItem);
     }
 
-//    public static void edit(int id){
-//        items.(id, items.getValue() );
-//    }
+    public static void edit(int id, String name, String description, GroceryCategory category){
+        GroceryItem groceryItem = items.get(id);
+        groceryItem.setName(name);
+        groceryItem.setDescription(description);
+        groceryItem.setCategory(category);
+    }
 
     //delete item
     public static void remove(int id){
