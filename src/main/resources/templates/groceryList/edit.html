@@ -6,23 +6,23 @@
 </head>
 <body class="container">
 
-<h2>Edit Grocery Item(s)</h2>
+<h1 class="greeting">Edit Grocery Item(s)</h1>
 
 <header th:replace="fragments :: header"></header>
+
+<h3></h3>
 
 <form id="editGroceryForm" method="get" action="/editgrocery">
     <div class="row">
         <div class="col-sm-8">
-        <label>Item Name
-            <input type="text" th:field="${groceryItem.name}" class="form-control">
-        </label>
+            <label>Item Name
+                <input type="text" th:field="${groceryItem.name}" class="form-control">
+            </label>
             <p class="error" th:errors="${groceryItem.name}"></p>
             <label>Description
                 <input type="text" th:field="${groceryItem.description}" class="form-control">
             </label>
             <p class="error" th:errors="${groceryItem.description}"></p>
-            <input type="text" name="groceryName" class="form-control">
-        </label>
             <div class="form-group">
                 <label>Grocery Category
                     <select th:field="${groceryItem.category}" class="form-control">

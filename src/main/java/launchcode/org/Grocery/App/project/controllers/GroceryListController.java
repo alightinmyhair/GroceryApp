@@ -38,7 +38,7 @@ public class GroceryListController {
 
     // TODO: - change url? ("addGrocery")
     @PostMapping
-    public String addGroceryItem(@ModelAttribute @Valid GroceryItem newGroceryItem, Model model, Errors errors){
+    public String addGroceryItem(@ModelAttribute @Valid GroceryItem newGroceryItem, Model model, @RequestParam int[] itemIds, Errors errors){
         if (errors.hasErrors()){
             model.addAttribute("items", GroceryItemData.getAll());
             return "groceryList/index";
