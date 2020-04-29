@@ -25,6 +25,17 @@ public class GroceryListController {
         return "groceryList/index";
 
     }
+// display a form in each row on groceryList
+    //loop through the grocery items in a table,
+    //with each table row being a form
+    //in the form my input fields would be my th field
+    @GetMapping("/editgrocery")
+    public String displayEditForm(Model model, GroceryItem newGroceryItem){
+        model.addAttribute("items", GroceryItemData.getAll());
+        model.addAttribute("categories", GroceryCategory.values());
+        return "groceryList/edit";
+    }
+
     // TODO: - change url? ("addGrocery")
     @PostMapping
     public String addGroceryItem(@ModelAttribute @Valid GroceryItem newGroceryItem, Model model, Errors errors){
