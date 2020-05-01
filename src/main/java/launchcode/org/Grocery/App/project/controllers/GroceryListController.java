@@ -9,9 +9,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-
 
 @Controller
 @RequestMapping("grocerylist")
@@ -19,9 +16,11 @@ public class GroceryListController {
 
     @GetMapping
     public String displayGroceryList(Model model){
+
         model.addAttribute("items", GroceryItemData.getAll());
         model.addAttribute("categories", GroceryCategory.values());
         model.addAttribute(new GroceryItem());
+
         return "groceryList/index";
 
     }
@@ -31,36 +30,37 @@ public class GroceryListController {
     //in the form my input fields would be my th field
     @GetMapping("/editgrocery")
     public String displayEditForm(Model model, GroceryItem newGroceryItem){
+
         model.addAttribute("items", GroceryItemData.getAll());
         model.addAttribute("categories", GroceryCategory.values());
+
         return "groceryList/edit";
     }
 
-    // TODO: - change url? ("addGrocery")
     @PostMapping("/add")
     public String addGroceryItem(@ModelAttribute @Valid GroceryItem newGroceryItem, Model model, Errors errors){
+
         if (errors.hasErrors()){
             model.addAttribute("items", GroceryItemData.getAll());
             return "groceryList/index";
         }
+
         GroceryItemData.add(newGroceryItem);
         model.addAttribute("items",GroceryItemData.getAll());
         model.addAttribute("categories", GroceryCategory.values());
+
         return "groceryList/index";
     }
 
     @PostMapping("/remove")
     public String removeGroceryItem(Model model, @RequestParam int[] itemIds, String edit, String delete){
+
         // TODO: RK - create new class to handle itemIds and edit/delete buttons?
         if (edit != null){
             System.out.println("edit button clicked");
             GroceryItem groceryItem = GroceryItemData.getById(itemIds[0]);
             System.out.println(groceryItem);
         }
-//        if (edit.equals("Edit Item")){
-//            System.out.println("edit button clicked");
-//            delete = "";
-//        }
 
         if (delete != null){
             System.out.println("delete clicked!");
@@ -71,19 +71,11 @@ public class GroceryListController {
                 }
             }
         }
-//        if (delete.equals("Delete Item")){
-//            System.out.println("delete button clicked");
-//            edit = "";
-//        }
-
-//        if (delete.equals("Delete Item")){
-//            System.out.println("delete button clicked!!! :D");
-//        }
 
         model.addAttribute("items",GroceryItemData.getAll());
         model.addAttribute("categories", GroceryCategory.values());
-        // TODO: KEJ - new GroceryItem added in 'groceryList/index', what was causing error?
         model.addAttribute(new GroceryItem());
+
         return "groceryList/index";
     }
 }
