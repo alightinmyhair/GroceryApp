@@ -24,7 +24,7 @@ public class GroceryListController {
         return "groceryList/index";
 
     }
-// display a form in each row on groceryList
+    // display a form in each row on groceryList
     //loop through the grocery items in a table,
     //with each table row being a form
     //in the form my input fields would be my th field
@@ -58,8 +58,10 @@ public class GroceryListController {
         // TODO: RK - create new class to handle itemIds and edit/delete buttons?
         if (edit != null){
             System.out.println("edit button clicked");
+            //is this really getting the id?
             GroceryItem groceryItem = GroceryItemData.getById(itemIds[0]);
-            System.out.println(groceryItem);
+//            GroceryItem groceryItem1 = GroceryItemData.getAll();
+//            System.out.println(groceryItem, groceryItem1);
         }
 
         if (delete != null){
