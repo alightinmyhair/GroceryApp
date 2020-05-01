@@ -37,8 +37,8 @@ public class GroceryListController {
     }
 
     // TODO: - change url? ("addGrocery")
-    @PostMapping
-    public String addGroceryItem(@ModelAttribute @Valid GroceryItem newGroceryItem, Model model, @RequestParam int[] itemIds, Errors errors){
+    @PostMapping("/add")
+    public String addGroceryItem(@ModelAttribute @Valid GroceryItem newGroceryItem, Model model, Errors errors){
         if (errors.hasErrors()){
             model.addAttribute("items", GroceryItemData.getAll());
             return "groceryList/index";
@@ -49,7 +49,7 @@ public class GroceryListController {
         return "groceryList/index";
     }
 
-    @PostMapping("grocerylist")
+    @PostMapping("/remove")
     public String removeGroceryItem(Model model, @RequestParam int[] itemIds, String edit, String delete){
         // TODO: RK - create new class to handle itemIds and edit/delete buttons?
         if (edit != null){
