@@ -11,31 +11,33 @@
 <header th:replace="fragments :: header"></header>
 
 <form id="editGroceryForm" method="get" action="/editgrocery">
-    <div class="row">
-        <div class="col-sm-8">
-            <label>Item Name
-                <input type="text" th:field="${groceryItem.name}" class="form-control">
-            </label>
-            <p class="error" th:errors="${groceryItem.name}"></p>
-            <label>Description
-                <input type="text" th:field="${groceryItem.description}" class="form-control">
-            </label>
-            <p class="error" th:errors="${groceryItem.description}"></p>
-            <div class="form-group">
-                <label>Grocery Category
-                    <select th:field="${groceryItem.category}" class="form-control">
-                        <option th:each="category : ${categories}"
-                                th:value="${category}"
-                                th:text="${category.displayName}"
-                        ></option>
-                    </select>
-                </label>
-            </div>
-    <div class="form-group">
-        <input type="submit" value="Update Grocery Item" class="btn btn-success">
-    </div>
+    <table class="table table-hover table-striped">
+        <thead>
+        <tr>
+            <th>Item Name</th>
+            <th>Item Description</th>
+            <th>Grocery Category</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block>
+            <tr  th:each="item : ${items}">
+                <td><input type="checkbox" name="itemIds" th:value="${item.id}"></td>
+                <td><input type="text" th:field="${groceryItem.name}"></td>
+                <td><input type="text" th:field="${groceryItem.description}"></td>
+                <td><select th:field="${groceryItem.category}" class="form-control">
+                    <option th:each="category : ${categories}"
+                            th:value="${category}"
+                            th:text="${category.displayName}"
+                    ></option>
+                </select></td>
+            </tr>
+        </th:block>
+        <div class="form-group">
+            <input form="editGroceryForm" type="submit" value="Update Grocery Item(s)" class="btn  btn-success btn-md" onclick="myFunction()">
         </div>
-    </div>
+        </div>
+        </tbody>
+    </table>
 </form>
-</body>
-</html>
+</body></html>

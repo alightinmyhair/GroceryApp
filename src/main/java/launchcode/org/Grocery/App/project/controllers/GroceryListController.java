@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("grocerylist")
@@ -30,18 +31,21 @@ public class GroceryListController {
     //with each table row being a form
     //in the form my input fields would be my th field
     @GetMapping("/editgrocery")
-    public String displayEditForm(Model model, GroceryItem[] groceryItems, int[] itemIds, String edit){
+    public String displayEditForm(Model model, int[] itemIds, String edit){
 
+        //If edit button is clicked, the below happens
         if (edit != null){
-            System.out.println("edit button clicked");
+            ArrayList<GroceryItem> groceryItems1 = new ArrayList<GroceryItem>();
+            for(int i = 0; i < itemIds.length; i++){
+                System.out.println(itemIds[i]);
+                groceryItems1.add(GroceryItemData.getById(itemIds[i]));
+            }
+            model.addAttribute("items", groceryItems1);
             //is this really getting the id?
             GroceryItem groceryItem = GroceryItemData.getById(itemIds[0]);
 //            GroceryItem groceryItem1 = GroceryItemData.getAll();
 //            System.out.println(groceryItem, groceryItem1);
             return "edit";
-        }
-        for(int i = 0; i < groceryItems.length; i++){
-            System.out.println(groceryItems[i]);
         }
         model.addAttribute("items", GroceryItemData.getAll());
         model.addAttribute("categories", GroceryCategory.values());
@@ -84,9 +88,9 @@ public class GroceryListController {
 
         if (edit != null){
             System.out.println("edit button clicked");
+            System.out.println("hi");
             //is this really getting the id?
-            GroceryItem groceryItem = GroceryItemData.getById(itemIds[0]);
-            model.addAttribute("groceryItem", groceryItem);
+            model.addAttribute("items", GroceryItemData.getAll());
             model.addAttribute("categories", GroceryCategory.values());
 //            GroceryItem groceryItem1 = GroceryItemData.getAll();
 //            System.out.println(groceryItem, groceryItem1);
