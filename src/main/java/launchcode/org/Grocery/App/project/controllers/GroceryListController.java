@@ -87,13 +87,14 @@ public class GroceryListController {
         // TODO: RK - create new class to handle itemIds and edit/delete buttons?
 
         if (edit != null) {
-            ArrayList<GroceryItem> groceryItems1 = new ArrayList<GroceryItem>();
+            ArrayList<GroceryItem> groceryItems1 = new ArrayList<>();
             for (int i = 0; i < itemIds.length; i++) {
                 System.out.println(itemIds[i]);
                 groceryItems1.add(GroceryItemData.getById(itemIds[i]));
             }
 
             model.addAttribute("items", groceryItems1);
+            return "groceryList/edit";
         }
 //        if (edit != null){
 //            System.out.println("edit button clicked");
