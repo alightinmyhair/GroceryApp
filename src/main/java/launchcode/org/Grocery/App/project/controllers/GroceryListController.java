@@ -9,6 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.SQLOutput;
 
 @Controller
 @RequestMapping("grocerylist")
@@ -29,21 +30,44 @@ public class GroceryListController {
     //with each table row being a form
     //in the form my input fields would be my th field
     @GetMapping("/editgrocery")
-    public String displayEditForm(Model model, GroceryItem newGroceryItem){
+    public String displayEditForm(Model model, GroceryItem[] groceryItems, int[] itemIds, String edit){
 
+        if (edit != null){
+            System.out.println("edit button clicked");
+            //is this really getting the id?
+            GroceryItem groceryItem = GroceryItemData.getById(itemIds[0]);
+//            GroceryItem groceryItem1 = GroceryItemData.getAll();
+//            System.out.println(groceryItem, groceryItem1);
+            return "edit";
+        }
+        for(int i = 0; i < groceryItems.length; i++){
+            System.out.println(groceryItems[i]);
+        }
         model.addAttribute("items", GroceryItemData.getAll());
         model.addAttribute("categories", GroceryCategory.values());
 
         return "groceryList/edit";
     }
 
-    @PostMapping("/add")
-    public String addGroceryItem(@ModelAttribute @Valid GroceryItem newGroceryItem, Model model, Errors errors){
+    @PostMapping("/editgrocery")
+    public String editGroceryItem(int id, String name, String description, GroceryCategory category, Model model){
+//
+//        if(GroceryItemData.getAll() != null){
+//            for (){
+//                System.out.println(GroceryItemData.getById(id));
+//                GroceryItemData.edit(id, name, description, category);
+//            }
+//        }
 
-        if (errors.hasErrors()){
-            model.addAttribute("items", GroceryItemData.getAll());
-            return "groceryList/index";
-        }
+        System.out.println("hi");
+        model.addAttribute("items",GroceryItemData.getAll());
+        model.addAttribute("categories", GroceryCategory.values());
+
+        return "groceryList/index";
+    }
+
+    @PostMapping("/add")
+    public String addGroceryItem(@ModelAttribute @Valid GroceryItem newGroceryItem, Model model){
 
         GroceryItemData.add(newGroceryItem);
         model.addAttribute("items",GroceryItemData.getAll());
@@ -53,15 +77,20 @@ public class GroceryListController {
     }
 
     @PostMapping("/remove")
-    public String removeGroceryItem(Model model, @RequestParam int[] itemIds, String edit, String delete){
+    public String removeGroceryItem(Model model, @RequestParam int[] itemIds, String delete, String edit){
 
         // TODO: RK - create new class to handle itemIds and edit/delete buttons?
+
+
         if (edit != null){
             System.out.println("edit button clicked");
             //is this really getting the id?
             GroceryItem groceryItem = GroceryItemData.getById(itemIds[0]);
+            model.addAttribute("groceryItem", groceryItem);
+            model.addAttribute("categories", GroceryCategory.values());
 //            GroceryItem groceryItem1 = GroceryItemData.getAll();
 //            System.out.println(groceryItem, groceryItem1);
+            return "groceryList/edit";
         }
 
         if (delete != null){
