@@ -10,7 +10,7 @@
 
 <header th:replace="fragments :: header"></header>
 
-<form id="editGroceryForm" method="get" action="/editgrocery">
+<form id="editGroceryForm" method="get" action="/grocerylist/index">
     <table class="table table-hover table-striped">
         <thead>
         <tr>
@@ -21,15 +21,15 @@
         </thead>
         <tbody>
         <th:block>
-            <tr  th:each="item : ${items}">
+            <tr  th:each="groceryItem : ${groceryItems}">
 <!--                <td><input type="checkbox" name="itemIds" th:value="${item.id}"></td>-->
-                <td><input type="text" th:value="${item.name}"></td>
-                <td><input type="text" th:value="${item.description}"></td>
-                <td><select th:field="${item.category.displayName}" class="form-control">
-<!--                    <option th:each="category : ${categories}"-->
-<!--                            th:value="${category}"-->
-<!--                            th:text="${category.displayName}"-->
-<!--                    ></option>-->
+                <td><input type="text" th:field="${groceryItem.name}"></td>
+                <td><input type="text" th:field="${groceryItem.description}"></td>
+                <td><select th:field="${groceryItem.category}" class="form-control">
+                    <option th:each="category : ${categories}"
+                            th:value="${category}"
+                            th:text="${category.displayName}"
+                    ></option>
                 </select></td>
             </tr>
         </th:block>

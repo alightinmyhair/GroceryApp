@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequestMapping("grocerylist")
@@ -82,18 +85,28 @@ public class GroceryListController {
     }
 
     @PostMapping("/update")
-    public String updateGroceryItem(Model model, @RequestParam int[] itemIds, String delete, String edit) {
+    public String updateGroceryItem(Model model, @RequestParam int[] itemIds, @ModelAttribute GroceryItem groceryItem, String delete, String edit) {
 
         // TODO: RK - create new class to handle itemIds and edit/delete buttons?
 
         if (edit != null) {
+
             ArrayList<GroceryItem> groceryItems1 = new ArrayList<>();
+
             for (int i = 0; i < itemIds.length; i++) {
                 System.out.println(itemIds[i]);
-                groceryItems1.add(GroceryItemData.getById(itemIds[i]));
+                GroceryItem tempGroceryItem = GroceryItemData.getById(itemIds[i]);
+                System.out.println(tempGroceryItem);
+                groceryItems1.add(tempGroceryItem);
             }
+            //GroceryItem groceryItem = groceryItems1.get(0); //GroceryItemData.getById(itemIds[0]);
+            model.addAttribute("groceryItems", groceryItems1);
+            model.addAttribute("groceryItem", groceryItem);
+//            model.addAttribute("items", groceryItems1.get(0));
+            model.addAttribute("categories", GroceryCategory.values());
+//            model.addAttribute(new GroceryItem());
+//            model.addAttribute(groceryItems1);
 
-            model.addAttribute("items", groceryItems1);
             return "groceryList/edit";
         }
 //        if (edit != null){
