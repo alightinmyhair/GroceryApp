@@ -25,9 +25,10 @@
 <!--                <td><input type="checkbox" name="itemIds" th:value="${item.id}"></td>-->
                 <td><input type="text" th:value="${groceryItem.name}"></td>
                 <td><input type="text" th:value="${groceryItem.description}"></td>
-                <td><select selected="${groceryItem.category}" class="form-control">
+                <td><select th:value="${groceryItem.category}" class="form-control">
                     <option th:each="category : ${categories}"
                             th:value="${category}"
+                            th:selected="${category == groceryItem.category}"
                             th:text="${category.displayName}"
                     ></option>
                 </select></td>
