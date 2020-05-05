@@ -3,6 +3,7 @@ package launchcode.org.Grocery.App.project.controllers;
 import launchcode.org.Grocery.App.project.data.GroceryItemData;
 import launchcode.org.Grocery.App.project.models.GroceryCategory;
 import launchcode.org.Grocery.App.project.models.GroceryItem;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -18,6 +19,9 @@ import java.util.List;
 @Controller
 @RequestMapping("grocerylist")
 public class GroceryListController {
+
+//    @Autowired(required = false)
+//    ArrayList<GroceryItem> groceryItems1 = new ArrayList<>();
 
     @GetMapping
     public String displayGroceryList(Model model) {
@@ -91,6 +95,7 @@ public class GroceryListController {
 
         if (edit != null) {
 
+
             ArrayList<GroceryItem> groceryItems1 = new ArrayList<>();
 
             for (int i = 0; i < itemIds.length; i++) {
@@ -102,6 +107,7 @@ public class GroceryListController {
             //GroceryItem groceryItem = groceryItems1.get(0); //GroceryItemData.getById(itemIds[0]);
             model.addAttribute("groceryItems", groceryItems1);
             model.addAttribute("groceryItem", groceryItem);
+            model.addAttribute("itemIds", itemIds);
 //            model.addAttribute("items", groceryItems1.get(0));
             model.addAttribute("categories", GroceryCategory.values());
 //            model.addAttribute(new GroceryItem());
