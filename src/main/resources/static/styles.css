@@ -15,11 +15,16 @@ font-size: 20px;
 }
 
 #comingsoon{
-color:orange;
-font-size:30px;
+list-style: none;
+font-family: 'Shadows Into Light', cursive;
+background-color:transparent;
+font-size: 20px;
 text-decoration: underline;
 }
 
+#orangelink{
+color:orange;
+}
 .error{
     color: red;
 }
