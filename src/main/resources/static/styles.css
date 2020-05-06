@@ -16,8 +16,6 @@ font-size: 20px;
 
 #comingsoon{
 list-style: none;
-font-family: 'Shadows Into Light', cursive;
-background-color:transparent;
 font-size: 20px;
 text-decoration: underline;
 }
@@ -25,6 +23,7 @@ text-decoration: underline;
 #orangelink{
 color:orange;
 }
+
 .error{
     color: red;
 }

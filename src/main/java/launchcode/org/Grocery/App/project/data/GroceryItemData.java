@@ -26,11 +26,13 @@ public class GroceryItemData {
         items.put(groceryItem.getId(), groceryItem);
     }
 
-    public static void edit(int id, String name, String description, GroceryCategory category){
-        GroceryItem groceryItem = items.get(id);
-        groceryItem.setName(name);
-        groceryItem.setDescription(description);
-        groceryItem.setCategory(category);
+    public static void edit(GroceryItem groceryItem, GroceryItem newGroceryItem/*Integer id, String name, String description, GroceryCategory category*/){
+        items.replace(groceryItem.getId(), newGroceryItem);
+//        if(id != null){
+//            groceryItem.setName(name);
+//            groceryItem.setDescription(description);
+//            groceryItem.setCategory(category);
+//        }
     }
 
     //delete item
