@@ -10,6 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.Array;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,15 +41,22 @@ public class GroceryListController {
     //in the form my input fields would be my th field
 
     @PostMapping
-    public String editGroceryItem(Model model, @ModelAttribute GroceryItem newGroceryItem, GroceryItem groceryItem/*Integer id, String name, String description, GroceryCategory category*/) {
+    public String editGroceryItem(@ModelAttribute GroceryItem groceryItem, Model model, Integer id, String name, String description, GroceryCategory category) {
 
-        GroceryItemData.edit(groceryItem, newGroceryItem);
+
+//        GroceryItemData.edit(groceryItem, newGroceryItem);
         System.out.println("hi");
-        model.addAttribute("newGroceryItem", newGroceryItem);
+        GroceryItem modifyGrocery = GroceryItemData.getById(id);
+        modifyGrocery.setName(name);
+        modifyGrocery.setDescription(description);
+        modifyGrocery.setCategory(category);
+        GroceryItemData.add(modifyGrocery);
+//        System.out.println(groceryItem);
+//        model.addAttribute("groceryItems", groceryItems);
         model.addAttribute("items", GroceryItemData.getAll());
         model.addAttribute("categories", GroceryCategory.values());
 
-        return "groceryList/index";
+        return "redirect:";
     }
 
     @PostMapping("/add")

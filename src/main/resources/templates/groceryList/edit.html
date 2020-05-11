@@ -23,7 +23,8 @@
         <th:block>
             <tr  th:each="groceryItem : ${groceryItems}">
 <!--                <td><input type="checkbox" name="itemIds" th:value="${item.id}"></td>-->
-                <td><input type="text" th:value="${groceryItem.name}"></td>
+<!--                <td type="text" th:value="${groceryItem.id}"></td>-->
+                <td><input name="modifyGrocery" type="text" th:value="${groceryItem.name}"></td>
                 <td><input type="text" th:value="${groceryItem.description}"></td>
                 <td><select th:value="${groceryItem.category}" class="form-control">
                     <option th:each="category : ${categories}"

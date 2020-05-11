@@ -11,7 +11,7 @@
 
 <form id="addGroceryForm" method="post" action="/grocerylist/add">
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-12">
             <label>Item Name
                 <input type="text" th:field="${groceryItem.name}" class="form-control">
             </label>
@@ -30,15 +30,11 @@
                     </select>
                 </label>
             </div>
-            <div class="form-group">
-                <input form="addGroceryForm" type="submit" value="Add Item" class="btn  btn-success btn-md" onclick="myFunction()">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-4">
-                <input type="submit" form="groceryListForm" name="edit" value="Edit Item" class="btn btn-warning btn-sm">
-                <input type="submit" form="groceryListForm" name="delete" value="Delete Item" class="btn btn-danger btn-sm">
-            </div>
+            <input form="addGroceryForm" type="submit" value="Add Item" class="btn  btn-success btn-md" onclick="myFunction()">
+            <input form="groceryListForm" type="submit" value="Delete Item" name="delete" class="btn btn-outline-danger">
+<!--            <div class="col-4">-->
+<!--&lt;!&ndash;            <div class="form-group">&ndash;&gt;-->
+<!--            </div>-->
         </div>
     </div>
 </form>
@@ -53,6 +49,7 @@
         <th>Item Name</th>
         <th>Item Description</th>
         <th>Grocery Category</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -62,10 +59,12 @@
             <td th:text="${item.name}"></td>
             <td th:text="${item.description}"></td>
             <td th:text="${item.category.displayName}"></td>
+            <td><input type="submit" form="groceryListForm" name="edit" value="Edit Item" class="btn btn-warning btn-sm"></td>
         </tr>
     </th:block>
     <tr th:unless="${items} and ${items.size()}">
         <td>No grocery items!</td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>

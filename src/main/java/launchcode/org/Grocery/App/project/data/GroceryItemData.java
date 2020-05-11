@@ -25,15 +25,15 @@ public class GroceryItemData {
     public static void add(GroceryItem groceryItem){
         items.put(groceryItem.getId(), groceryItem);
     }
-
-    public static void edit(GroceryItem groceryItem, GroceryItem newGroceryItem/*Integer id, String name, String description, GroceryCategory category*/){
-        items.replace(groceryItem.getId(), newGroceryItem);
-//        if(id != null){
-//            groceryItem.setName(name);
-//            groceryItem.setDescription(description);
-//            groceryItem.setCategory(category);
-//        }
-    }
+//
+//    public static void edit(Integer id, String name, String description, GroceryCategory category){
+////        items.replace(groceryItem.getId(), newGroceryItem);
+////        if(id != null){
+////            groceryItem.setName(name);
+////            groceryItem.setDescription(description);
+////            groceryItem.setCategory(category);
+////        }
+//    }
 
     //delete item
     public static void remove(int id){
