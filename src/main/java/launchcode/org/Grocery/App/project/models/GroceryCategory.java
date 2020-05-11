@@ -2,13 +2,14 @@ package launchcode.org.Grocery.App.project.models;
 
 public enum GroceryCategory {
 
-    GRAINS("Grains"),
-    VEGETABLES("Vegetables"),
-    FRUIT("Fruit"),
     DAIRY("Dairy"),
-    PROTEIN("Protein"),
+    FRUITS("Fruits"),
+    GRAINS("Grains"),
+    MISCELLANEOUS("Miscellaneous"),
+    PROTEINS("Proteins"),
+    SPIRITS("Spirits"),
     SWEETS("Sweets"),
-    MISCELLANEOUS("Miscellaneous");
+    VEGETABLES("Vegetables");
 
     private final String displayName;
 
