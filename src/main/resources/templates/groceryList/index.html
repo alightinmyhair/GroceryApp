@@ -45,20 +45,20 @@
 <table class="table table-hover table-striped">
     <thead>
     <tr>
-        <th>Select</th>
         <th>Item Name</th>
         <th>Item Description</th>
         <th>Grocery Category</th>
+        <th>Select</th>
         <th></th>
     </tr>
     </thead>
     <tbody>
     <th:block>
         <tr  th:each="item : ${items}">
-            <td><input type="checkbox" name="itemIds" th:value="${item.id}"></td>
             <td th:text="${item.name}"></td>
             <td th:text="${item.description}"></td>
             <td th:text="${item.category.displayName}"></td>
+            <td><input type="checkbox" name="itemIds" th:value="${item.id}"></td>
             <td><input type="submit" form="groceryListForm" name="edit" value="Edit Item" class="btn btn-warning btn-sm"></td>
         </tr>
     </th:block>

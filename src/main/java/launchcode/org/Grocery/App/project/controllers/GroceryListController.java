@@ -47,17 +47,16 @@ public class GroceryListController {
         System.out.println("hi");
 
         if (update != null) {
-            ArrayList<GroceryItem> groceries = new ArrayList<>();
-
             for(int i=0; i<groceryItemIds.length; i++){
                 System.out.println(groceryItemIds[i]);
                 GroceryItem tempGroceryItem = GroceryItemData.getById(groceryItemIds[i]);
                 System.out.println(tempGroceryItem);
-                groceries.add(tempGroceryItem);
+                GroceryItemData.add(tempGroceryItem);
                 System.out.println("hi2");
             }
 
-            model.addAttribute("groceryItems", groceries);
+            System.out.println(groceryItem);
+            model.addAttribute("groceryItems", GroceryItemData.getAll());
             model.addAttribute("groceryItemIds", groceryItemIds);
             model.addAttribute("groceryItem", groceryItem);
             model.addAttribute("categories", GroceryCategory.values());
