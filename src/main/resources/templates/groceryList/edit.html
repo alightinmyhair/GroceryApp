@@ -24,6 +24,7 @@
             <tr  th:each="groceryItem : ${groceryItems}">
 <!--                <td><input type="checkbox" name="itemIds" th:value="${item.id}"></td>-->
 <!--                <td type="text" th:value="${groceryItem.id}"></td>-->
+                <td><input type="checkbox" name="groceryItemIds" th:value="${groceryItem.id}"></td>
                 <td><input name="modifyGrocery" type="text" th:value="${groceryItem.name}"></td>
                 <td><input type="text" th:value="${groceryItem.description}"></td>
                 <td><select th:value="${groceryItem.category}" class="form-control">
@@ -36,7 +37,7 @@
             </tr>
         </th:block>
         <div class="form-group">
-            <input form="editGroceryForm" type="submit" value="Update Grocery Item(s)" class="btn  btn-success btn-md" onclick="myFunction()">
+            <input type="submit" form="editGroceryForm" name="update" value="Update Grocery Item" class="btn  btn-success btn-md">
         </div>
         </div>
         </tbody>

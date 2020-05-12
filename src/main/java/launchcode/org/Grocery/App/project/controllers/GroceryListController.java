@@ -41,22 +41,29 @@ public class GroceryListController {
     //in the form my input fields would be my th field
 
     @PostMapping
-    public String editGroceryItem(@ModelAttribute GroceryItem groceryItem, Model model, Integer id, String name, String description, GroceryCategory category) {
+    public String editGroceryItem(Model model, @ModelAttribute GroceryItem groceryItem, int [] groceryItemIds, String update) {
 
 
-//        GroceryItemData.edit(groceryItem, newGroceryItem);
         System.out.println("hi");
-        GroceryItem modifyGrocery = GroceryItemData.getById(id);
-        modifyGrocery.setName(name);
-        modifyGrocery.setDescription(description);
-        modifyGrocery.setCategory(category);
-        GroceryItemData.add(modifyGrocery);
-//        System.out.println(groceryItem);
-//        model.addAttribute("groceryItems", groceryItems);
-        model.addAttribute("items", GroceryItemData.getAll());
-        model.addAttribute("categories", GroceryCategory.values());
 
-        return "redirect:";
+        if (update != null) {
+            ArrayList<GroceryItem> groceries = new ArrayList<>();
+
+            for(int i=0; i<groceryItemIds.length; i++){
+                System.out.println(groceryItemIds[i]);
+                GroceryItem tempGroceryItem = GroceryItemData.getById(groceryItemIds[i]);
+                System.out.println(tempGroceryItem);
+                groceries.add(tempGroceryItem);
+                System.out.println("hi2");
+            }
+
+            model.addAttribute("groceryItems", groceries);
+            model.addAttribute("groceryItemIds", groceryItemIds);
+            model.addAttribute("groceryItem", groceryItem);
+            model.addAttribute("categories", GroceryCategory.values());
+            }
+
+        return "groceryList/index";
     }
 
     @PostMapping("/add")
