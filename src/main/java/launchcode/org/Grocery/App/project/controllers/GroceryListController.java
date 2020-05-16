@@ -3,7 +3,6 @@ package launchcode.org.Grocery.App.project.controllers;
 import launchcode.org.Grocery.App.project.data.GroceryItemData;
 import launchcode.org.Grocery.App.project.models.GroceryCategory;
 import launchcode.org.Grocery.App.project.models.GroceryItem;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -21,9 +20,6 @@ import java.util.List;
 @RequestMapping("grocerylist")
 public class GroceryListController {
 
-//    @Autowired(required = false)
-//    ArrayList<GroceryItem> groceryItems1 = new ArrayList<>();
-
     @GetMapping
     public String displayGroceryList(Model model) {
 
@@ -39,30 +35,21 @@ public class GroceryListController {
     //loop through the grocery items in a table,
     //with each table row being a form
     //in the form my input fields would be my th field
+    @PostMapping("/edit")
+    public String editGroceryItem(Model model, @RequestParam int itemId, @ModelAttribute GroceryItem groceryItem) {
+//, int [] groceryItemIds, String update
+        System.out.println("yo");
 
-    @PostMapping
-    public String editGroceryItem(Model model, @ModelAttribute GroceryItem groceryItem, int [] groceryItemIds, String update) {
+        GroceryItem tempGroceryItem = GroceryItemData.getById(itemId);
+        System.out.println(tempGroceryItem);
+//        GroceryItemData.add(tempGroceryItem);
 
+        model.addAttribute("groceryItems", GroceryItemData.getAll());
+//        model.addAttribute("groceryItemIds", groceryItemIds);
+        model.addAttribute("groceryItem", tempGroceryItem);
+        model.addAttribute("categories", GroceryCategory.values());
 
-        System.out.println("hi");
-
-        if (update != null) {
-            for(int i=0; i<groceryItemIds.length; i++){
-                System.out.println(groceryItemIds[i]);
-                GroceryItem tempGroceryItem = GroceryItemData.getById(groceryItemIds[i]);
-                System.out.println(tempGroceryItem);
-                GroceryItemData.add(tempGroceryItem);
-                System.out.println("hi2");
-            }
-
-            System.out.println(groceryItem);
-            model.addAttribute("groceryItems", GroceryItemData.getAll());
-            model.addAttribute("groceryItemIds", groceryItemIds);
-            model.addAttribute("groceryItem", groceryItem);
-            model.addAttribute("categories", GroceryCategory.values());
-            }
-
-        return "groceryList/index";
+        return "groceryList/edit";
     }
 
     @PostMapping("/add")
