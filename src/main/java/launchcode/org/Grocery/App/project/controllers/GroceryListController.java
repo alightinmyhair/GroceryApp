@@ -31,6 +31,22 @@ public class GroceryListController {
 
     }
 
+    @PostMapping
+    public String updateGroceryList(Model model, @RequestParam int itemId, @ModelAttribute GroceryItem groceryItem, String name, String description, GroceryCategory category) {
+
+        GroceryItem modifyGroceryItem = GroceryItemData.getById(itemId);
+        modifyGroceryItem.setName(name);
+        modifyGroceryItem.setDescription(description);
+        modifyGroceryItem.setCategory(category);
+
+        model.addAttribute("items", GroceryItemData.getAll());
+        model.addAttribute("categories", GroceryCategory.values());
+        model.addAttribute(new GroceryItem());
+
+        return "groceryList/index";
+
+    }
+
     // display a form in each row on groceryList
     //loop through the grocery items in a table,
     //with each table row being a form

@@ -14,7 +14,6 @@
     <table class="table table-hover table-striped">
         <thead>
         <tr>
-            <th>Select</th>
             <th>Item Name</th>
             <th>Item Description</th>
             <th>Grocery Category</th>
@@ -25,9 +24,10 @@
             <tr>
 <!--                <td><input type="checkbox" name="itemIds" th:value="${item.id}"></td>-->
 <!--                <td type="text" th:value="${groceryItem.id}"></td>-->
-                <td><input type="text" th:field="${groceryItem.name}"></td>
-                <td><input type="text" th:field="${groceryItem.description}"></td>
-                <td><select th:field="${groceryItem.category}" class="form-control">
+                <td><input type="text" name="name" th:value="${groceryItem.name}"></td>
+                <td><input type="text" name="description" th:value="${groceryItem.description}"></td>
+                <input type="hidden" name="itemId" th:value="${groceryItem.id}">
+                <td><select name="category"  th:value="${groceryItem.category}" class="form-control">
                     <option th:each="category : ${categories}"
                             th:value="${category}"
                             th:selected="${category == groceryItem.category}"

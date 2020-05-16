@@ -48,7 +48,6 @@
         <th>Item Name</th>
         <th>Item Description</th>
         <th>Grocery Category</th>
-        <th>Select</th>
         <th></th>
     </tr>
     </thead>
@@ -58,13 +57,12 @@
             <td th:text="${item.name}"></td>
             <td th:text="${item.description}"></td>
             <td th:text="${item.category.displayName}"></td>
-            <td><input type="checkbox" name="itemId" th:value="${item.id}"></td>
+            <td><input type="hidden" name="itemId" th:value="${item.id}"></td>
             <td><input type="submit" form="groceryListForm" name="edit" value="Edit Item" class="btn btn-warning btn-sm"></td>
         </tr>
     </th:block>
     <tr th:unless="${items} and ${items.size()}">
         <td>No grocery items!</td>
-        <td></td>
         <td></td>
         <td></td>
         <td></td>
