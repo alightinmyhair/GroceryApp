@@ -47,18 +47,13 @@ public class GroceryListController {
 
     }
 
-    // display a form in each row on groceryList
-    //loop through the grocery items in a table,
-    //with each table row being a form
-    //in the form my input fields would be my th field
     @PostMapping("/edit")
     public String editGroceryItem(Model model, @RequestParam int itemId, @ModelAttribute GroceryItem groceryItem) {
-//, int [] groceryItemIds, String update
+
         System.out.println("yo");
 
         GroceryItem tempGroceryItem = GroceryItemData.getById(itemId);
         System.out.println(tempGroceryItem);
-//        GroceryItemData.add(tempGroceryItem);
 
         model.addAttribute("groceryItems", GroceryItemData.getAll());
 //        model.addAttribute("groceryItemIds", groceryItemIds);
