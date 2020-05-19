@@ -47,21 +47,21 @@ public class GroceryListController {
 
     }
 
-    @PostMapping("/edit")
-    public String editGroceryItem(Model model, @RequestParam int itemId, @ModelAttribute GroceryItem groceryItem) {
-
-        System.out.println("yo");
-
-        GroceryItem tempGroceryItem = GroceryItemData.getById(itemId);
-        System.out.println(tempGroceryItem);
-
-        model.addAttribute("groceryItems", GroceryItemData.getAll());
-//        model.addAttribute("groceryItemIds", groceryItemIds);
-        model.addAttribute("groceryItem", tempGroceryItem);
-        model.addAttribute("categories", GroceryCategory.values());
-
-        return "groceryList/edit";
-    }
+//    @PostMapping("/edit")
+//    public String editGroceryItem(Model model, @RequestParam int itemId, @ModelAttribute GroceryItem groceryItem, @RequestParam int[] itemIds, String delete) {
+//
+//        System.out.println("yo");
+//
+//        GroceryItem tempGroceryItem = GroceryItemData.getById(itemId);
+//        System.out.println(tempGroceryItem);
+//
+//        model.addAttribute("groceryItems", GroceryItemData.getAll());
+////        model.addAttribute("groceryItemIds", groceryItemIds);
+//        model.addAttribute("groceryItem", tempGroceryItem);
+//        model.addAttribute("categories", GroceryCategory.values());
+//
+//        return "groceryList/edit";
+//    }
 
     @PostMapping("/add")
     public String addGroceryItem(@ModelAttribute @Valid GroceryItem newGroceryItem, Model model) {
@@ -74,41 +74,34 @@ public class GroceryListController {
     }
 
     @PostMapping("/update")
-    public String updateGroceryItem(Model model, @RequestParam int[] itemIds, @ModelAttribute GroceryItem groceryItem, String delete, String edit) {
+    public String updateGroceryItem(Model model, @RequestParam int[] itemIds, @RequestParam int itemId, @ModelAttribute GroceryItem groceryItem, String delete, String edit) {
 
         if (edit != null) {
-            ArrayList<GroceryItem> groceryItems1 = new ArrayList<>();
+            GroceryItem tempGroceryItem = GroceryItemData.getById(itemId);
+            System.out.println(tempGroceryItem);
 
-            for (int i = 0; i < itemIds.length; i++) {
-                System.out.println(itemIds[i]);
-                GroceryItem tempGroceryItem = GroceryItemData.getById(itemIds[i]);
-                System.out.println(tempGroceryItem);
-                groceryItems1.add(tempGroceryItem);
-            }
-
-            model.addAttribute("groceryItems", groceryItems1);
-            model.addAttribute("groceryItem", groceryItem);
-            model.addAttribute("itemIds", itemIds);
+            model.addAttribute("groceryItems", GroceryItemData.getAll());
+//        model.addAttribute("groceryItemIds", groceryItemIds);
+            model.addAttribute("groceryItem", tempGroceryItem);
             model.addAttribute("categories", GroceryCategory.values());
 
             return "groceryList/edit";
         }
-
-            if (delete != null) {
-                System.out.println("delete clicked!");
-                if (itemIds != null) {
-                    for (int id : itemIds) {
-                        System.out.println(GroceryItemData.getById(id));
-                        GroceryItemData.remove(id);
-                    }
+        if (delete != null) {
+            System.out.println("delete clicked!");
+            if (itemIds != null) {
+                for (int id : itemIds) {
+                    System.out.println(GroceryItemData.getById(id));
+                    GroceryItemData.remove(id);
                 }
             }
-
-            model.addAttribute("items", GroceryItemData.getAll());
-            model.addAttribute("categories", GroceryCategory.values());
-            model.addAttribute(new GroceryItem());
-
-            return "groceryList/index";
         }
+
+        model.addAttribute("items", GroceryItemData.getAll());
+        model.addAttribute("categories", GroceryCategory.values());
+        model.addAttribute(new GroceryItem());
+
+        return "groceryList/index";
     }
+}
 

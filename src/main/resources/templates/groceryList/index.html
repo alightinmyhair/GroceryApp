@@ -30,17 +30,13 @@
                     </select>
                 </label>
             </div>
-            <input form="addGroceryForm" type="submit" value="Add Item" class="btn  btn-success btn-md" onclick="myFunction()">
+            <input form="addGroceryForm" type="submit" value="Add Item" class="btn  btn-success btn-md">
             <input form="groceryListForm" type="submit" value="Delete Item" name="delete" class="btn btn-outline-danger">
-<!--            <div class="col-4">-->
-<!--&lt;!&ndash;            <div class="form-group">&ndash;&gt;-->
-<!--            </div>-->
         </div>
     </div>
 </form>
 
-
-<form id="groceryListForm" method="post" action="/grocerylist/edit">
+<form id="groceryListForm" method="post" action="/grocerylist/update">
 
 <table class="table table-hover table-striped">
     <thead>
@@ -55,7 +51,7 @@
     <tbody>
     <th:block>
         <tr  th:each="item : ${items}">
-            <td><input type="checkbox" name="delete"></td>
+            <td><input type="checkbox" name="itemIds" th:value="${item.id}"></td>
             <td th:text="${item.name}"></td>
             <td th:text="${item.description}"></td>
             <td th:text="${item.category.displayName}"></td>
@@ -65,7 +61,6 @@
     </th:block>
     <tr th:unless="${items} and ${items.size()}">
         <td>No grocery items!</td>
-        <td></td>
         <td></td>
         <td></td>
         <td></td>
