@@ -31,12 +31,12 @@
                 </label>
             </div>
             <input form="addGroceryForm" type="submit" value="Add Item" class="btn  btn-success btn-md">
-            <input form="groceryListForm" type="submit" value="Delete Item" name="delete" class="btn btn-outline-danger">
+            <input form="groceryListForm" type="submit" value="Delete Item(s)" name="delete" class="btn btn-outline-danger">
         </div>
     </div>
 </form>
 
-<form id="groceryListForm" method="post" action="/grocerylist/update">
+<form id="groceryListForm" method="post" action="/grocerylist/delete">
 
 <table class="table table-hover table-striped">
     <thead>
@@ -55,12 +55,14 @@
             <td th:text="${item.name}"></td>
             <td th:text="${item.description}"></td>
             <td th:text="${item.category.displayName}"></td>
-            <td><input type="hidden" name="itemId" th:value="${item.id}"></td>
-            <td><input type="submit" form="groceryListForm" name="edit" value="Edit Item" class="btn btn-warning btn-sm"></td>
+            <td>
+                <a class="btn btn-warning btn-sm"  th:href="@{/grocerylist/edit(itemId=${item.id})}" type="button" value="Edit">Edit</a>
+            </td>
         </tr>
     </th:block>
     <tr th:unless="${items} and ${items.size()}">
         <td>No grocery items!</td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>

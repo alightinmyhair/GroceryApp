@@ -6,7 +6,7 @@
 </head>
 <body class="container">
 
-<h1 class="greeting">Edit Grocery Item(s)</h1>
+<h1 class="greeting">Edit Grocery Item</h1>
 
 <header th:replace="fragments :: header"></header>
 
@@ -22,8 +22,6 @@
         <tbody>
         <th:block>
             <tr>
-<!--                <td><input type="checkbox" name="itemIds" th:value="${item.id}"></td>-->
-<!--                <td type="text" th:value="${groceryItem.id}"></td>-->
                 <td><input type="text" name="name" th:value="${groceryItem.name}"></td>
                 <td><input type="text" name="description" th:value="${groceryItem.description}"></td>
                 <input type="hidden" name="itemId" th:value="${groceryItem.id}">

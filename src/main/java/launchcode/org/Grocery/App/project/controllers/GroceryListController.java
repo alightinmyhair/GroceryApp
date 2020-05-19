@@ -47,21 +47,21 @@ public class GroceryListController {
 
     }
 
-//    @PostMapping("/edit")
-//    public String editGroceryItem(Model model, @RequestParam int itemId, @ModelAttribute GroceryItem groceryItem, @RequestParam int[] itemIds, String delete) {
-//
-//        System.out.println("yo");
-//
-//        GroceryItem tempGroceryItem = GroceryItemData.getById(itemId);
-//        System.out.println(tempGroceryItem);
-//
-//        model.addAttribute("groceryItems", GroceryItemData.getAll());
-////        model.addAttribute("groceryItemIds", groceryItemIds);
-//        model.addAttribute("groceryItem", tempGroceryItem);
-//        model.addAttribute("categories", GroceryCategory.values());
-//
-//        return "groceryList/edit";
-//    }
+    @GetMapping("/edit")
+    public String editGroceryItem(Model model, @RequestParam int itemId, @ModelAttribute GroceryItem groceryItem) {
+
+        System.out.println("yo");
+
+        GroceryItem tempGroceryItem = GroceryItemData.getById(itemId);
+        System.out.println(tempGroceryItem);
+
+        model.addAttribute("groceryItems", GroceryItemData.getAll());
+//        model.addAttribute("groceryItemIds", groceryItemIds);
+        model.addAttribute("groceryItem", tempGroceryItem);
+        model.addAttribute("categories", GroceryCategory.values());
+
+        return "groceryList/edit";
+    }
 
     @PostMapping("/add")
     public String addGroceryItem(@ModelAttribute @Valid GroceryItem newGroceryItem, Model model) {
@@ -73,29 +73,29 @@ public class GroceryListController {
         return "groceryList/index";
     }
 
-    @PostMapping("/update")
-    public String updateGroceryItem(Model model, @RequestParam int[] itemIds, @RequestParam int itemId, @ModelAttribute GroceryItem groceryItem, String delete, String edit) {
+    @PostMapping("/delete")
+    public String updateGroceryItem(Model model, @RequestParam int[] itemIds, @ModelAttribute GroceryItem groceryItem) {
 
-        if (edit != null) {
-            GroceryItem tempGroceryItem = GroceryItemData.getById(itemId);
-            System.out.println(tempGroceryItem);
-
-            model.addAttribute("groceryItems", GroceryItemData.getAll());
-//        model.addAttribute("groceryItemIds", groceryItemIds);
-            model.addAttribute("groceryItem", tempGroceryItem);
-            model.addAttribute("categories", GroceryCategory.values());
-
-            return "groceryList/edit";
-        }
-        if (delete != null) {
-            System.out.println("delete clicked!");
-            if (itemIds != null) {
-                for (int id : itemIds) {
-                    System.out.println(GroceryItemData.getById(id));
-                    GroceryItemData.remove(id);
-                }
+//        if (edit != null) {
+//            GroceryItem tempGroceryItem = GroceryItemData.getById(itemId);
+//            System.out.println(tempGroceryItem);
+//
+//            model.addAttribute("groceryItems", GroceryItemData.getAll());
+////        model.addAttribute("groceryItemIds", groceryItemIds);
+//            model.addAttribute("groceryItem", tempGroceryItem);
+//            model.addAttribute("categories", GroceryCategory.values());
+//
+//            return "groceryList/edit";
+//        }
+//        if (delete != null) {
+//            System.out.println("delete clicked!");
+        if (itemIds != null) {
+            for (int id : itemIds) {
+                System.out.println(GroceryItemData.getById(id));
+                GroceryItemData.remove(id);
             }
         }
+
 
         model.addAttribute("items", GroceryItemData.getAll());
         model.addAttribute("categories", GroceryCategory.values());
