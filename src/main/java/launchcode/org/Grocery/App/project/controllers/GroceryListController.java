@@ -64,8 +64,13 @@ public class GroceryListController {
     }
 
     @PostMapping("/add")
-    public String addGroceryItem(@ModelAttribute @Valid GroceryItem newGroceryItem, Model model) {
+    public String addGroceryItem(@ModelAttribute @Valid GroceryItem newGroceryItem, Errors errors, Model model) {
 
+        if(errors.hasErrors()){
+            model.addAttribute("categories", GroceryCategory.values());
+            model.addAttribute(new GroceryItem());
+            return "groceryList/index";
+        }
         GroceryItemData.add(newGroceryItem);
         model.addAttribute("items", GroceryItemData.getAll());
         model.addAttribute("categories", GroceryCategory.values());
