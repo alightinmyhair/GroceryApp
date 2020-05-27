@@ -31,6 +31,21 @@ public class GroceryListController {
 
     }
 
+    @PostMapping("/add")
+    public String addGroceryItem(@ModelAttribute @Valid GroceryItem newGroceryItem, Errors errors, Model model) {
+
+        if(errors.hasErrors()){
+            model.addAttribute("categories", GroceryCategory.values());
+            model.addAttribute("items", GroceryItemData.getAll());
+            return "groceryList/index";
+        }
+        GroceryItemData.add(newGroceryItem);
+        model.addAttribute("items", GroceryItemData.getAll());
+        model.addAttribute("categories", GroceryCategory.values());
+
+        return "groceryList/index";
+    }
+
     @PostMapping
     public String updateGroceryList(Model model, @RequestParam int itemId, @ModelAttribute GroceryItem groceryItem, String name, String description, GroceryCategory category) {
 
@@ -63,23 +78,8 @@ public class GroceryListController {
         return "groceryList/edit";
     }
 
-    @PostMapping("/add")
-    public String addGroceryItem(@ModelAttribute @Valid GroceryItem newGroceryItem, Errors errors, Model model) {
-
-        if(errors.hasErrors()){
-            model.addAttribute("categories", GroceryCategory.values());
-            model.addAttribute(new GroceryItem());
-            return "groceryList/index";
-        }
-        GroceryItemData.add(newGroceryItem);
-        model.addAttribute("items", GroceryItemData.getAll());
-        model.addAttribute("categories", GroceryCategory.values());
-
-        return "groceryList/index";
-    }
-
     @PostMapping("/delete")
-    public String updateGroceryItem(Model model, @RequestParam int[] itemIds, @ModelAttribute GroceryItem groceryItem) {
+    public String updateGroceryItem(Model model, @RequestParam int[] itemIds, @ModelAttribute GroceryItem groceryItem, String delete) {
 
 //        if (edit != null) {
 //            GroceryItem tempGroceryItem = GroceryItemData.getById(itemId);
@@ -93,7 +93,10 @@ public class GroceryListController {
 //            return "groceryList/edit";
 //        }
 //        if (delete != null) {
-//            System.out.println("delete clicked!");
+//            model.addAttribute("items", GroceryItemData.getAll());
+//            model.addAttribute("categories", GroceryCategory.values());
+//            return "groceryList/index";
+//        }<!--TODO: Put validation on the Delete Button-->
         if (itemIds != null) {
             for (int id : itemIds) {
                 System.out.println(GroceryItemData.getById(id));
