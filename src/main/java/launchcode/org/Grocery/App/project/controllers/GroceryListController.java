@@ -8,13 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.sql.Array;
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import javax.validation.Valid;git
 
 @Controller
 @RequestMapping("grocerylist")
@@ -65,13 +59,9 @@ public class GroceryListController {
     @GetMapping("/edit")
     public String editGroceryItem(Model model, @RequestParam int itemId, @ModelAttribute GroceryItem groceryItem) {
 
-        System.out.println("yo");
-
         GroceryItem tempGroceryItem = GroceryItemData.getById(itemId);
-        System.out.println(tempGroceryItem);
 
         model.addAttribute("groceryItems", GroceryItemData.getAll());
-//        model.addAttribute("groceryItemIds", groceryItemIds);
         model.addAttribute("groceryItem", tempGroceryItem);
         model.addAttribute("categories", GroceryCategory.values());
 
