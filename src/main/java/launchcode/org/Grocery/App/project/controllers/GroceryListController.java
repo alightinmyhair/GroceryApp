@@ -34,7 +34,7 @@ public class GroceryListController {
     @PostMapping("/add")
     public String addGroceryItem(@ModelAttribute @Valid GroceryItem newGroceryItem, Errors errors, Model model) {
 
-        if(errors.hasErrors()){
+        if (errors.hasErrors()) {
             model.addAttribute("categories", GroceryCategory.values());
             model.addAttribute("items", GroceryItemData.getAll());
             return "groceryList/index";
@@ -79,31 +79,13 @@ public class GroceryListController {
     }
 
     @PostMapping("/delete")
-    public String updateGroceryItem(Model model, @RequestParam int[] itemIds, @ModelAttribute GroceryItem groceryItem, String delete) {
+    public String updateGroceryItem(Model model, @RequestParam (required=false) int[] itemIds, @ModelAttribute GroceryItem groceryItem) {
 
-//        if (edit != null) {
-//            GroceryItem tempGroceryItem = GroceryItemData.getById(itemId);
-//            System.out.println(tempGroceryItem);
-//
-//            model.addAttribute("groceryItems", GroceryItemData.getAll());
-////        model.addAttribute("groceryItemIds", groceryItemIds);
-//            model.addAttribute("groceryItem", tempGroceryItem);
-//            model.addAttribute("categories", GroceryCategory.values());
-//
-//            return "groceryList/edit";
-//        }
-//        if (delete != null) {
-//            model.addAttribute("items", GroceryItemData.getAll());
-//            model.addAttribute("categories", GroceryCategory.values());
-//            return "groceryList/index";
-//        }<!--TODO: Put validation on the Delete Button-->
-        if (itemIds != null) {
+        if(itemIds != null)
             for (int id : itemIds) {
                 System.out.println(GroceryItemData.getById(id));
                 GroceryItemData.remove(id);
             }
-        }
-
 
         model.addAttribute("items", GroceryItemData.getAll());
         model.addAttribute("categories", GroceryCategory.values());
@@ -112,4 +94,3 @@ public class GroceryListController {
         return "groceryList/index";
     }
 }
-
