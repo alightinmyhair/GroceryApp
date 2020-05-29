@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;git
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("grocerylist")
