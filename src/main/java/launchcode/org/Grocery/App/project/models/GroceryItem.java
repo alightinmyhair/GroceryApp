@@ -1,13 +1,18 @@
 package launchcode.org.Grocery.App.project.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
+@Entity
 public class GroceryItem {
 
+    @Id
+    @GeneratedValue
     private int id;
-    private static int nextId=1;
 
     @NotBlank(message="Item name must not be blank.")
     @Size(min=3, max =50, message="Item name must be between 3-50 characters.")
@@ -19,15 +24,12 @@ public class GroceryItem {
     private GroceryCategory category;
 
     public GroceryItem(String name, String description, GroceryCategory category) {
-        this();
         this.name = name;
         this.description = description;
         this.category = category;
     }
 
     public GroceryItem(){
-        this.id=nextId;
-        nextId++;
     }
 
 
