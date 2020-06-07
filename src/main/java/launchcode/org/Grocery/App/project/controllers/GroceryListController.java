@@ -1,23 +1,28 @@
 package launchcode.org.Grocery.App.project.controllers;
 
-import launchcode.org.Grocery.App.project.data.GroceryItemData;
+import launchcode.org.Grocery.App.project.data.GroceryItemRepository;
 import launchcode.org.Grocery.App.project.models.GroceryCategory;
 import launchcode.org.Grocery.App.project.models.GroceryItem;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("grocerylist")
 public class GroceryListController {
 
+    @Autowired
+    private GroceryItemRepository groceryItemRepository;
+
     @GetMapping
     public String displayGroceryList(Model model) {
 
-        model.addAttribute("items", GroceryItemData.getAll());
+        model.addAttribute("items", groceryItemRepository.findAll());
         model.addAttribute("categories", GroceryCategory.values());
         model.addAttribute(new GroceryItem());
 
@@ -30,11 +35,11 @@ public class GroceryListController {
 
         if (errors.hasErrors()) {
             model.addAttribute("categories", GroceryCategory.values());
-            model.addAttribute("items", GroceryItemData.getAll());
+            model.addAttribute("items", groceryItemRepository.findAll());
             return "groceryList/index";
         }
-        GroceryItemData.add(newGroceryItem);
-        model.addAttribute("items", GroceryItemData.getAll());
+        groceryItemRepository.save(newGroceryItem);
+        model.addAttribute("items", groceryItemRepository.findAll());
         model.addAttribute("categories", GroceryCategory.values());
 
         return "groceryList/index";
@@ -43,12 +48,19 @@ public class GroceryListController {
     @PostMapping
     public String updateGroceryList(Model model, @RequestParam int itemId, @ModelAttribute GroceryItem groceryItem, String name, String description, GroceryCategory category) {
 
-        GroceryItem modifyGroceryItem = GroceryItemData.getById(itemId);
-        modifyGroceryItem.setName(name);
-        modifyGroceryItem.setDescription(description);
-        modifyGroceryItem.setCategory(category);
+        Optional<GroceryItem> modifyGroceryItem = groceryItemRepository.findById(itemId);
 
-        model.addAttribute("items", GroceryItemData.getAll());
+        if(modifyGroceryItem.isEmpty()){
+            return "groceryList/edit";
+        }
+        else {
+            GroceryItem groceryItem1 = modifyGroceryItem.get();
+            groceryItem1.setName(name);
+            groceryItem1.setDescription(description);
+            groceryItem1.setCategory(category);
+        }
+
+        model.addAttribute("items", groceryItemRepository.findAll());
         model.addAttribute("categories", GroceryCategory.values());
         model.addAttribute(new GroceryItem());
 
@@ -59,9 +71,9 @@ public class GroceryListController {
     @GetMapping("/edit")
     public String editGroceryItem(Model model, @RequestParam int itemId, @ModelAttribute GroceryItem groceryItem) {
 
-        GroceryItem tempGroceryItem = GroceryItemData.getById(itemId);
+        Optional<GroceryItem> tempGroceryItem = groceryItemRepository.findById(itemId);
 
-        model.addAttribute("groceryItems", GroceryItemData.getAll());
+        model.addAttribute("groceryItems", groceryItemRepository.findAll());
         model.addAttribute("groceryItem", tempGroceryItem);
         model.addAttribute("categories", GroceryCategory.values());
 
@@ -73,11 +85,10 @@ public class GroceryListController {
 
         if(itemIds != null)
             for (int id : itemIds) {
-                System.out.println(GroceryItemData.getById(id));
-                GroceryItemData.remove(id);
+                groceryItemRepository.deleteById(id);
             }
 
-        model.addAttribute("items", GroceryItemData.getAll());
+        model.addAttribute("items", groceryItemRepository.findAll());
         model.addAttribute("categories", GroceryCategory.values());
         model.addAttribute(new GroceryItem());
 
