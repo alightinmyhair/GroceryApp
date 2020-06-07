@@ -58,6 +58,7 @@ public class GroceryListController {
             groceryItem1.setName(name);
             groceryItem1.setDescription(description);
             groceryItem1.setCategory(category);
+            groceryItemRepository.save(groceryItem1);
         }
 
         model.addAttribute("items", groceryItemRepository.findAll());
@@ -73,11 +74,17 @@ public class GroceryListController {
 
         Optional<GroceryItem> tempGroceryItem = groceryItemRepository.findById(itemId);
 
-        model.addAttribute("groceryItems", groceryItemRepository.findAll());
-        model.addAttribute("groceryItem", tempGroceryItem);
-        model.addAttribute("categories", GroceryCategory.values());
+        if(tempGroceryItem.isEmpty()) {
+            return "groceryList/edit";
 
-        return "groceryList/edit";
+        }
+        else{
+            GroceryItem groceryItem1 = tempGroceryItem.get();
+            model.addAttribute("groceryItems", groceryItemRepository.findAll());
+            model.addAttribute("groceryItem", groceryItem1);
+            model.addAttribute("categories", GroceryCategory.values());
+            return "groceryList/edit";
+        }
     }
 
     @PostMapping("/delete")
