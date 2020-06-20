@@ -2,6 +2,7 @@ package launchcode.org.Grocery.App.project.models;
 
 public enum GroceryCategory {
 
+    //TODO: Lookup Blank Space for enums?
     DAIRY("Dairy"),
     FRUITS("Fruits"),
     GRAINS("Grains"),
