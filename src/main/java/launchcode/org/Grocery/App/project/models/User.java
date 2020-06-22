@@ -4,12 +4,18 @@ import org.dom4j.tree.AbstractEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class User extends AbstractEntity {
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    @Id
+    @GeneratedValue
+    private int id;
 
     @NotNull
     private String username;
@@ -26,6 +32,10 @@ public class User extends AbstractEntity {
 
     public String getUsername(){
         return username;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public boolean isMatchingPassword(String password) {
