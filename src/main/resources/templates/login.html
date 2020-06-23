@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8">
+    <title>Grocery App</title>
+</head>
+
+<body class="container">
+<h1 class="greeting">Welcome to the Grocery App!</h1>
+<header th:replace="fragments :: header"></header>
+
+<form method="post">
+<div class="row">
+    <div class="col-sm-8">
+        <label th:for="username">Username
+            <input class="form-control" th:field="${loginFormDTO.username}"/>
+        </label>
+        <p class="error" th:errors="${loginFormDTO.username}"></p>
+        <label>Password
+            <input class="form-control" th:field="${loginFormDTO.password}" type="password"/>
+        </label>
+        <p class="error" th:errors="${loginFormDTO.password}"></p>
+        <div class="form-group">
+            <input type="submit" value="Log In!" class="btn  btn-success btn-md">
+            <p>Don't have an account? <a href="/register">Register for one.</a></p>
+        </div>
+    </div>
+</div>
+</form>
+</body>
+</html>
