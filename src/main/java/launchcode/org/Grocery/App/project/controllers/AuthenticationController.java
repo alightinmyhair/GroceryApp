@@ -1,6 +1,9 @@
 package launchcode.org.Grocery.App.project.controllers;
 
+import launchcode.org.Grocery.App.project.data.GroceryItemRepository;
 import launchcode.org.Grocery.App.project.data.UserRepository;
+import launchcode.org.Grocery.App.project.models.GroceryCategory;
+import launchcode.org.Grocery.App.project.models.GroceryItem;
 import launchcode.org.Grocery.App.project.models.User;
 import launchcode.org.Grocery.App.project.models.dto.LoginFormDTO;
 import launchcode.org.Grocery.App.project.models.dto.RegisterFormDTO;
@@ -22,6 +25,9 @@ public class AuthenticationController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    private GroceryItemRepository groceryItemRepository;
 
     private static final String userSessionKey = "user";
 
@@ -121,6 +127,10 @@ public class AuthenticationController {
 
         setUserInSession(request.getSession(), theUser);
 
-        return "/grocerylist";
+        model.addAttribute("items", groceryItemRepository.findAll());
+        model.addAttribute("categories", GroceryCategory.values());
+        model.addAttribute(new GroceryItem());
+
+        return "groceryList/index";
     }
 }
