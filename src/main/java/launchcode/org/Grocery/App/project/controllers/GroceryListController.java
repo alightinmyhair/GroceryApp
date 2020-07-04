@@ -22,6 +22,7 @@ public class GroceryListController {
     @GetMapping
     public String displayGroceryList(Model model) {
 
+
         model.addAttribute("items", groceryItemRepository.findAll());
         model.addAttribute("categories", GroceryCategory.values());
         model.addAttribute(new GroceryItem());
