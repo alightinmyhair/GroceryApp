@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-
 <head th:replace="fragments :: head">
     <meta charset="UTF-8">
     <title>Grocery App</title>
@@ -11,7 +10,7 @@
 <h1 class="greeting">Welcome to the Grocery App!</h1>
 <header th:replace="fragments :: header"></header>
 
-<form method="post" action="/login">
+<form method="post" action="/register">
     <div class="form-group">
         <label>Username
             <input class="form-control" th:field="${registerFormDTO.username}" />
