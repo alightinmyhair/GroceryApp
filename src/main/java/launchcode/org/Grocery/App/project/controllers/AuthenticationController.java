@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("auth")
+//@RequestMapping("auth")
 public class AuthenticationController {
 
     @Autowired
@@ -50,6 +51,14 @@ public class AuthenticationController {
 
     private static void setUserInSession(HttpSession session, User user) {
         session.setAttribute(userSessionKey, user.getId());
+    }
+
+    @GetMapping
+    public String index(){
+
+        // Kris testing
+//        model.addAttribute("loginFormDTO", new LoginFormDTO());
+        return "index";
     }
 
     @GetMapping("/register")
@@ -109,6 +118,9 @@ public class AuthenticationController {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Log In");
+
+            System.out.println("Hi");
+
             return "login";
         }
 
@@ -117,19 +129,28 @@ public class AuthenticationController {
         if (theUser == null) {
             errors.rejectValue("username", "user.invalid", "The given username does not exist");
             model.addAttribute("title", "Log In");
+
+
+            System.out.println("Hi");
+
             return "login";
         }
 
         String password = loginFormDTO.getPassword();
 
         if (!theUser.isMatchingPassword(password)) {
+
+
+            System.out.println("Hi");
+
             errors.rejectValue("password", "password.invalid", "Invalid password");
             model.addAttribute("title", "Log In");
             return "login";
         }
 
-        setUserInSession(request.getSession(), theUser);
+        System.out.println("Hi");
 
+        setUserInSession(request.getSession(), theUser);
         model.addAttribute("items", groceryItemRepository.findAll());
         model.addAttribute("categories", GroceryCategory.values());
         model.addAttribute(new GroceryItem());

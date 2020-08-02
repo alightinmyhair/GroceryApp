@@ -24,7 +24,7 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
     @Autowired
     AuthenticationController authenticationController;
 
-    private static final List<String> whitelist = Arrays.asList("/auth/login", "/auth/register", "/auth/logout", "/script.js", "/styles.css");
+    private static final List<String> whitelist = Arrays.asList("/login", "/register", "/logout", "/script.js", "/styles.css");
 
     @Override
     public boolean preHandle(HttpServletRequest request,
@@ -46,10 +46,9 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
         }
 
         // The user is NOT logged in
-//        model.addAttribute("loginFormDTO", new LoginFormDTO());
         request.setAttribute("loginFormDTO", new LoginFormDTO());
-//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login");
-        response.sendRedirect("auth/login");
+        response.sendRedirect("/login");
+
         return false;
     }
 
