@@ -22,7 +22,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-//@RequestMapping("login")
+@RequestMapping("auth")
 public class AuthenticationController {
 
     @Autowired
@@ -138,8 +138,10 @@ public class AuthenticationController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request){
+    public String logout(HttpServletRequest request, Model model){
         request.getSession().invalidate();
+        // Kris testing
+        model.addAttribute("loginFormDTO", new LoginFormDTO());
         return "login";
     }
 }

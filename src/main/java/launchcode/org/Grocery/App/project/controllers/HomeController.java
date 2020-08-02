@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("test")
+//@RequestMapping("test")
 public class HomeController {
 
     @GetMapping
-    public String index(Model model){
+    public String index(){
 
         // Kris testing
-        model.addAttribute("loginFormDTO", new LoginFormDTO());
-        return "login";
+//        model.addAttribute("loginFormDTO", new LoginFormDTO());
+        return "index";
     }
 }

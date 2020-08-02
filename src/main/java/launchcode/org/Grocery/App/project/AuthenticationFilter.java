@@ -3,9 +3,12 @@ package launchcode.org.Grocery.App.project;
 import launchcode.org.Grocery.App.project.controllers.AuthenticationController;
 import launchcode.org.Grocery.App.project.data.UserRepository;
 import launchcode.org.Grocery.App.project.models.User;
+import launchcode.org.Grocery.App.project.models.dto.LoginFormDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,7 +24,7 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
     @Autowired
     AuthenticationController authenticationController;
 
-    private static final List<String> whitelist = Arrays.asList("/login", "/register", "/logout", "/script.js", "/styles.css");
+    private static final List<String> whitelist = Arrays.asList("/auth/login", "/auth/register", "/auth/logout", "/script.js", "/styles.css");
 
     @Override
     public boolean preHandle(HttpServletRequest request,
@@ -43,9 +46,13 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
         }
 
         // The user is NOT logged in
-        response.sendRedirect("/login");
+//        model.addAttribute("loginFormDTO", new LoginFormDTO());
+        request.setAttribute("loginFormDTO", new LoginFormDTO());
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login");
+        response.sendRedirect("auth/login");
         return false;
     }
+
 
     private static boolean isWhitelisted(String path) {
         for (String pathRoot : whitelist) {
