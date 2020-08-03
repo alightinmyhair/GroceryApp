@@ -34,6 +34,7 @@ public class AuthenticationController {
 
     private static final String userSessionKey = "user";
 
+
     public User getUserFromSession(HttpSession session) {
         Integer userId = (Integer) session.getAttribute(userSessionKey);
         if (userId == null) {
@@ -54,12 +55,15 @@ public class AuthenticationController {
     }
 
     @GetMapping
-    public String index(){
+    public String index(HttpSession session, Model model){
 
-        // Kris testing
-//        model.addAttribute("loginFormDTO", new LoginFormDTO());
+        User user = getUserFromSession(session);
+        String username = user.getUsername();
+        System.out.println(username);
+        model.addAttribute("username", username);
+
         return "index";
-    }
+}
 
     @GetMapping("/register")
     public String displayRegistrationForm(Model model){

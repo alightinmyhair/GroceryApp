@@ -34,6 +34,13 @@ public class User extends AbstractEntity {
         return username;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
