@@ -4,9 +4,14 @@ line-height:50px;
 
 .greeting{
 font-family: 'Pacifico', cursive;
-color: #020116;
-margin: 20px;
+color: #010402;
+margin-top: 25px;
 
+
+}
+
+.username{
+font-family: 'Pacifico', cursive;
 }
 
 .container{

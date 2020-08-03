@@ -6,12 +6,14 @@
 </head>
 
 <body class="container">
-<img src="">
-<h1 class="greeting">Welcome to the Grocery App!</h1>
+
+<h1 class="greeting">The Grocery App!</h1>
 <header th:replace="fragments :: header"></header>
 
+<p></p>
 
-<p th:text="${user.username}"></p>
+<h3>Logged in as: </h3><p class="username" th:text="${user.username}"></p>
+<h5><a href="/logout">Logout</a></h5>
 <!--getSession. A method contained in HttpServletRequest-->
 
 

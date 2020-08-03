@@ -13,18 +13,18 @@
 
 <body class="container">
 <nav th:fragment="header">
-        <h1 th:text="${title}">The Grocery App</h1>
+        <h1 class="greeting" th:text="${title}">The Grocery App</h1>
         <ul class="nav">
 <!--            Kris Testing-->
 <!--            <li class="nav-item"><a class="nav-link" href="/login">Homepage</a></li>-->
             <li class="nav-item"><a class="nav-link" href="/">Homepage</a></li>
             <li class="nav-item"><a class="nav-link" href="/grocerylist">Grocery Lists</a></li>
-            <li class = "nav-item"><a class="nav-link" href="/logout">Logout</a></li>
 <!--                TODO: - add space between these two sections-->
 
+            <p></p>
             <ul id="comingsoon">
 <!--                <li class="nav-item" id="comingsoon"></li>-->
-                <li><a id="orangelink" class="nav-link" href="/groceryresults">Results Page and Grocery Library Page - Coming Soon!</a></li>
+                <li><a id="orangelink" class="nav-link" href="/groceryLibrary">Grocery Library Page - Coming Soon!</a></li>
 <!--                <li><a id="" href="/grocerylibrary">Grocery Library - Coming Soon!</a></li>-->
             </ul>
         </ul>
