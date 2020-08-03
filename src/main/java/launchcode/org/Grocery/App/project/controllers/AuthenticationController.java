@@ -60,7 +60,8 @@ public class AuthenticationController {
         User user = getUserFromSession(session);
         String username = user.getUsername();
         System.out.println(username);
-        model.addAttribute("username", username);
+
+        model.addAttribute("user", user);
 
         return "index";
 }
