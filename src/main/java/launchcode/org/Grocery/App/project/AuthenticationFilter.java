@@ -5,10 +5,8 @@ import launchcode.org.Grocery.App.project.data.UserRepository;
 import launchcode.org.Grocery.App.project.models.User;
 import launchcode.org.Grocery.App.project.models.dto.LoginFormDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
