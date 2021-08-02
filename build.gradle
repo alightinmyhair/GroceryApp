@@ -17,6 +17,9 @@ configurations {
 
 repositories {
 	mavenCentral()
+	maven {
+		url 'ca5ee32c-eefd-4755-9d5b-5bfb8c6bc64f/_packaging/GroceryApp/maven/v1'
+	}
 }
 
 dependencies {
