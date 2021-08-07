@@ -22,8 +22,8 @@
         <tbody>
         <th:block>
             <tr>
-                <td><input type="text" name="name" th:value="${groceryItem.name}"></td>
-                <td><input type="text" name="description" th:value="${groceryItem.description}"></td>
+                <td><input type="text" name="name" th:value="${groceryItem.name}" class="form-control"></td>
+                <td><input type="text" name="description" th:value="${groceryItem.description}" class="form-control"></td>
                 <input type="hidden" name="itemId" th:value="${groceryItem.id}">
                 <td><select name="category"  th:value="${groceryItem.category}" class="form-control">
                     <option th:each="category : ${categories}"

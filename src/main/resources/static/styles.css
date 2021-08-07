@@ -5,7 +5,7 @@ line-height:50px;
 
 .greeting{
 font-family: 'Pacifico', cursive;
-color: #010402;
+color: #0D3038;
 margin-top: 25px;
 
 
@@ -24,7 +24,6 @@ font-size: 20px;
 #comingsoon{
 list-style: none;
 font-size: 20px;
-text-decoration: underline;
 }
 
 #orangelink{
