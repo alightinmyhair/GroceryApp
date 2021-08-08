@@ -1,1 +1,1 @@
-web: java -jar build/libs/Grocery-App-project-0.0.1-SNAPSHOT.jar
+web: java -jar build/libs/Grocery-App-project-0.0.1-SNAPSHOT.jar --server.port=$PORT
