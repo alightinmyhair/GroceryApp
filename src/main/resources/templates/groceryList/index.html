@@ -20,6 +20,7 @@
             <label>Description
                 <input type="text" th:field="${groceryItem.description}" class="form-control">
             </label>
+<!--            <input type="hidden" th:field="${groceryItem.user}" th:value="${session.user}">-->
             <p class="error" th:errors="${groceryItem.description}"></p>
             <div class="form-group">
                 <label>Grocery Category

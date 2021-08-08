@@ -134,8 +134,6 @@ public class AuthenticationController {
             model.addAttribute("title", "Log In");
 
 
-            System.out.println("Hi");
-
             return "login";
         }
 
@@ -143,18 +141,13 @@ public class AuthenticationController {
 
         if (!theUser.isMatchingPassword(password)) {
 
-
-            System.out.println("Hi");
-
             errors.rejectValue("password", "password.invalid", "Invalid password");
             model.addAttribute("title", "Log In");
             return "login";
         }
 
-        System.out.println("Hi");
-
         setUserInSession(request.getSession(), theUser);
-        model.addAttribute("items", groceryItemRepository.findAll());
+        model.addAttribute("items", theUser.getGroceryItemList());
         model.addAttribute("categories", GroceryCategory.values());
         model.addAttribute(new GroceryItem());
 
@@ -163,8 +156,9 @@ public class AuthenticationController {
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, Model model){
+
         request.getSession().invalidate();
-        // Kris testing
+
         model.addAttribute("loginFormDTO", new LoginFormDTO());
         return "login";
     }

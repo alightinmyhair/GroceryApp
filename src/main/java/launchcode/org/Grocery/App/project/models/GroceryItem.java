@@ -1,13 +1,12 @@
 package launchcode.org.Grocery.App.project.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
+@Table(name = "grocery_item")
 public class GroceryItem {
 
     @Id
@@ -22,6 +21,10 @@ public class GroceryItem {
     private String description;
 
     private GroceryCategory category;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     public GroceryItem(String name, String description, GroceryCategory category) {
         this.name = name;
@@ -60,6 +63,11 @@ public class GroceryItem {
     public void setCategory(GroceryCategory category) {
         this.category = category;
     }
+
+    public User getUser() {return user;}
+
+    public void setUser(User user) {this.user = user;}
+
 
     @Override
     public String toString() {
