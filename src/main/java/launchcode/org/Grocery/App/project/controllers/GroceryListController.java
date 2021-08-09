@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Optional;
@@ -68,7 +69,7 @@ public class GroceryListController {
         if (errors.hasErrors()) {
             model.addAttribute("categories", GroceryCategory.values());
             model.addAttribute("items", user.getGroceryItemList());
-            return "groceryList/index";
+            return "grocerylist/index";
         }
 
         newGroceryItem.setUser(user);
@@ -76,19 +77,36 @@ public class GroceryListController {
         model.addAttribute("items", user.getGroceryItemList());
         model.addAttribute("categories", GroceryCategory.values());
 
-        return "groceryList/index";
+        return "redirect:/grocerylist";
     }
 
-    @PostMapping
-    public String updateGroceryList(HttpSession session,Model model, @RequestParam int itemId, @ModelAttribute GroceryItem groceryItem, String name, String description, GroceryCategory category) {
+    @PostMapping("/edit")
+    public String updateGroceryList(HttpSession session, Model model, @ModelAttribute @Valid GroceryItem groceryItem, Errors errors, String name, String description, GroceryCategory category, int itemId) {
+
         User user = getUserFromSession(session);
 
-        Optional<GroceryItem> modifyGroceryItem = groceryItemRepository.findById(itemId);
+//        Optional<GroceryItem> modifyGroceryItem = groceryItemRepository.findById(itemId);
 
-        if(modifyGroceryItem.isEmpty()){
+        if(errors.hasErrors()){
+            // reset grocery item from db
+//            Optional<GroceryItem> tempGroceryItem = groceryItemRepository.findById(id);
+//
+//            GroceryItem groceryItem1 = tempGroceryItem.get();
+
+            System.out.println("the itemId before validation: " + itemId);
+
+            model.addAttribute("groceryItem", groceryItem);
+            model.addAttribute("itemId", itemId);
+            model.addAttribute("categories", GroceryCategory.values());
+//            model.addAttribute("itemId", model.getAttribute("item"));
             return "groceryList/edit";
+//            return "grocerylist/edit?itemId=" + itemId;
         }
         else {
+            System.out.println("the itemId after validation is: " + itemId);
+
+            Optional<GroceryItem> modifyGroceryItem = groceryItemRepository.findById(itemId);
+
             GroceryItem groceryItem1 = modifyGroceryItem.get();
             groceryItem1.setName(name);
             groceryItem1.setDescription(description);
@@ -100,7 +118,7 @@ public class GroceryListController {
         model.addAttribute("categories", GroceryCategory.values());
         model.addAttribute(new GroceryItem());
 
-        return "groceryList/index";
+        return "redirect:/grocerylist";
 
     }
 
@@ -109,17 +127,24 @@ public class GroceryListController {
         User user = getUserFromSession(session);
 
         Optional<GroceryItem> tempGroceryItem = groceryItemRepository.findById(itemId);
+        System.out.println("id! " + tempGroceryItem.get().getId());
+//        Optional<GroceryItem> tempGroceryItem = groceryItemRepository.findById(groceryItem.getId());
 
         if(tempGroceryItem.isEmpty()) {
-            return "groceryList/edit";
+            return "redirect:/grocerylist";
 
         }
         else{
             GroceryItem groceryItem1 = tempGroceryItem.get();
+
+            System.out.println("groceryItem id in get request " + groceryItem1.getId());
+
             model.addAttribute("groceryItems", user.getGroceryItemList());
             model.addAttribute("groceryItem", groceryItem1);
+            model.addAttribute("itemId", groceryItem1.getId());
             model.addAttribute("categories", GroceryCategory.values());
-            return "groceryList/edit";
+
+            return "grocerylist/edit";
         }
     }
 
@@ -136,6 +161,6 @@ public class GroceryListController {
         model.addAttribute("categories", GroceryCategory.values());
         model.addAttribute(new GroceryItem());
 
-        return "groceryList/index";
+        return "redirect:/grocerylist";
     }
 }

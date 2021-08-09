@@ -10,7 +10,7 @@
 
 <header th:replace="fragments :: header"></header>
 
-<form id="editGroceryForm" method="post" action="/grocerylist">
+<form id="editGroceryForm" method="post" action="/grocerylist/edit" modelAttribute="groceryItem">
     <table class="table table-hover table-striped">
         <thead>
         <tr>
@@ -23,8 +23,11 @@
         <th:block>
             <tr>
                 <td><input type="text" name="name" th:value="${groceryItem.name}" class="form-control"></td>
+                <p class="error" th:errors="${groceryItem.name}"></p>
                 <td><input type="text" name="description" th:value="${groceryItem.description}" class="form-control"></td>
-                <input type="hidden" name="itemId" th:value="${groceryItem.id}">
+                <p class="error" th:errors="${groceryItem.description}"></p>
+                <input type="hidden" name="id" th:value="${groceryItem.id}">
+                <input type="hidden" name="itemId" th:value="${itemId}">
                 <td><select name="category"  th:value="${groceryItem.category}" class="form-control">
                     <option th:each="category : ${categories}"
                             th:value="${category}"
