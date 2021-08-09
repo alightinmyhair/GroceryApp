@@ -69,7 +69,7 @@ public class GroceryListController {
         if (errors.hasErrors()) {
             model.addAttribute("categories", GroceryCategory.values());
             model.addAttribute("items", user.getGroceryItemList());
-            return "grocerylist/index";
+            return "groceryList/index";
         }
 
         newGroceryItem.setUser(user);
@@ -77,7 +77,7 @@ public class GroceryListController {
         model.addAttribute("items", user.getGroceryItemList());
         model.addAttribute("categories", GroceryCategory.values());
 
-        return "redirect:/grocerylist";
+        return "redirect:";
     }
 
     @PostMapping("/edit")
@@ -100,7 +100,7 @@ public class GroceryListController {
             model.addAttribute("categories", GroceryCategory.values());
 //            model.addAttribute("itemId", model.getAttribute("item"));
             return "groceryList/edit";
-//            return "grocerylist/edit?itemId=" + itemId;
+//            return "groceryList/edit?itemId=" + itemId;
         }
         else {
             System.out.println("the itemId after validation is: " + itemId);
@@ -118,7 +118,7 @@ public class GroceryListController {
         model.addAttribute("categories", GroceryCategory.values());
         model.addAttribute(new GroceryItem());
 
-        return "redirect:/grocerylist";
+        return "redirect:";
 
     }
 
@@ -131,7 +131,7 @@ public class GroceryListController {
 //        Optional<GroceryItem> tempGroceryItem = groceryItemRepository.findById(groceryItem.getId());
 
         if(tempGroceryItem.isEmpty()) {
-            return "redirect:/grocerylist";
+            return "redirect:";
 
         }
         else{
@@ -144,7 +144,7 @@ public class GroceryListController {
             model.addAttribute("itemId", groceryItem1.getId());
             model.addAttribute("categories", GroceryCategory.values());
 
-            return "grocerylist/edit";
+            return "groceryList/edit";
         }
     }
 
@@ -161,6 +161,6 @@ public class GroceryListController {
         model.addAttribute("categories", GroceryCategory.values());
         model.addAttribute(new GroceryItem());
 
-        return "redirect:/grocerylist";
+        return "redirect:";
     }
 }
