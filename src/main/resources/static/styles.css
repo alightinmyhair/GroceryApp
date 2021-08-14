@@ -33,3 +33,9 @@ color:orange;
 .error{
     color: red;
 }
+
+@media (min-width: 400px) and (max-width: 1199.98px){
+    body{
+        width: 20%;
+    }
+}

@@ -48,9 +48,9 @@ public class ResultsController {
         }
 
         User user = getUserFromSession(session);
-//        model.addAttribute("items", user.getGroceryItemList());
-//        model.addAttribute("categories", GroceryCategory.values());
-//        model.addAttribute(new GroceryItem());
+        model.addAttribute("items", user.getGroceryItemList());
+        model.addAttribute("categories", GroceryCategory.values());
+        model.addAttribute(new GroceryItem());
 
         return "groceryList/results";
 

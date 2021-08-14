@@ -1,4 +1,6 @@
+//let myChart = document.getElementById('myChart').getContext('2d');
 let myChart = document.getElementById('myChart').getContext('2d');
+
 
 let groceryItemSumChart = new Chart(myChart, {
     type:'bar',
